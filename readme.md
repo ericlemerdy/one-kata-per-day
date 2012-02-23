@@ -51,6 +51,6 @@ five cards belong to the player named "White".
 ### Sample output:
 
     White wins. - with high card: Ace
-    White wins. - with flash
+    White wins. - with flush
     Black wins. - with high card: 9
     Tie.
