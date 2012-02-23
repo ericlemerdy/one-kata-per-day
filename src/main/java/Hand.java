@@ -1,9 +1,9 @@
 import static com.google.common.base.Joiner.on;
 import static com.google.common.collect.Iterables.transform;
+import static com.google.common.collect.Lists.newArrayList;
 
+import java.nio.channels.IllegalSelectorException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import com.google.common.base.Function;
@@ -14,18 +14,26 @@ public class Hand {
     private List<Card> cards;
     private String playerName;
 
-    public static Card1 card(Value value, Suit suit) {
-        return new Card1(value, suit);
+    public Hand() {
+        this.cards = newArrayList();
     }
 
-    public Hand(List<Card> previousCards, String playerName) {
-        cards = previousCards;
-        Collections.sort(cards, new Comparator<Card>() {
-            public int compare(Card o1, Card o2) {
-                return o1.getValue().compareTo(o2.getValue());
-            }
-        });
+    public static Hand hand() {
+        return new Hand();
+    }
+
+    public Hand addCard(Value value, Suit suit) {
+        Card card = new Card(value, suit);
+        this.cards.add(card);
+        return this;
+    }
+
+    public Hand player(String playerName) throws IllegalStateException {
+        if (this.cards.size() != 5) {
+            throw new IllegalSelectorException();
+        }
         this.playerName = playerName;
+        return this;
     }
 
     public List<Card> getCards() {

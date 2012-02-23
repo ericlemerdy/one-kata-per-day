@@ -8,23 +8,45 @@ public class HandTest {
 
     @Test
     public void should_create_a_sorted_hand() {
-        Hand hand = Hand.card(Value.Ace, Suit.heart).card(Value._2, Suit.clubs).card(Value._2, Suit.clubs)
-                .card(Value._2, Suit.clubs).card(Value._2, Suit.clubs).player("Junit");
+        // Hand.card().two().of().club()
+
+        Hand hand = Hand.hand().addCard(Value.Ace, Suit.heart) //
+                .addCard(Value._2, Suit.clubs) //
+                .addCard(Value._2, Suit.clubs) //
+                .addCard(Value._2, Suit.clubs) //
+                .addCard(Value._2, Suit.clubs).player("Junit");
         List<Card> cards = hand.getCards();
 
         assertThat(cards).hasSize(5);
-        assertThat(cards).onProperty("value").containsExactly(Value._2, Value._2, Value._2, Value._2, Value.Ace);
-        assertThat(cards).onProperty("suit")
-                .containsExactly(Suit.clubs, Suit.clubs, Suit.clubs, Suit.clubs, Suit.heart);
+        assertThat(cards).onProperty("value").contains(Value._2, Value._2, Value._2, Value._2, Value.Ace);
+        assertThat(cards).onProperty("suit").contains(Suit.heart, Suit.clubs, Suit.clubs, Suit.clubs, Suit.heart);
     }
 
     @Test
     public void with_a_straight_flush() {
-        Hand hand = Hand.card(Value._7, Suit.diamond).card(Value._8, Suit.diamond).card(Value._9, Suit.diamond)
-                .card(Value._10, Suit.diamond).card(Value.Jack, Suit.diamond).player("junit");
+        Hand hand = Hand.hand().addCard(Value._7, Suit.diamond) //
+                .addCard(Value._8, Suit.diamond) //
+                .addCard(Value._9, Suit.diamond) //
+                .addCard(Value._10, Suit.diamond) //
+                .addCard(Value.Jack, Suit.diamond).player("junit");
 
         assertThat(hand.hasStraightFlush_plainJava()).isTrue();
-        // assertThat(hand.getStraightFlush()).isEqualTo(Value.Jack);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void should_not_create_a_hand_with_less_than_5_cards() {
+        Hand.hand().addCard(Value._10, Suit.clubs).player("junit");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void should_not_create_a_hand_with_more_than_5_cards() {
+        Hand.hand().addCard(Value._10, Suit.clubs) //
+                .addCard(Value._10, Suit.clubs)//
+                .addCard(Value._10, Suit.clubs)//
+                .addCard(Value._10, Suit.clubs)//
+                .addCard(Value._10, Suit.clubs)//
+                .addCard(Value._10, Suit.clubs)//
+                .player("junit");
     }
 
 }

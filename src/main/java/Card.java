@@ -4,12 +4,14 @@ public class Card {
 
     private Value value;
     private Suit suit;
-    protected Card previousCard;
 
-    public Card(Value value, Suit suit, Card previousCard) {
+    public Card(Value value, Suit suit) {
         this.value = value;
         this.suit = suit;
-        this.previousCard = previousCard;
+    }
+
+    public static Card addCard(Value value, Suit suit) {
+        return new Card(value, suit);
     }
 
     public Value getValue() {
