@@ -1,17 +1,15 @@
-import java.util.List;
-
 import com.google.common.base.Objects;
 
 public class Card {
 
     private Value value;
     private Suit suit;
-    protected List<Card> previousCards;
+    protected Card previousCard;
 
-    public Card(Value value, Suit suit, List<Card> previousCards) {
+    public Card(Value value, Suit suit, Card previousCard) {
         this.value = value;
         this.suit = suit;
-        this.previousCards = previousCards;
+        this.previousCard = previousCard;
     }
 
     public Value getValue() {

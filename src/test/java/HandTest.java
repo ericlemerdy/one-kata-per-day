@@ -1,6 +1,5 @@
 import static org.fest.assertions.Assertions.assertThat;
 
-import org.fest.assertions.Assertions;
 import org.junit.Test;
 
 public class HandTest {
@@ -10,24 +9,18 @@ public class HandTest {
         Hand hand = Hand.card(Value.Ace, Suit.heart).card(Value._2, Suit.clubs).card(Value._2, Suit.clubs)
                 .card(Value._2, Suit.clubs).card(Value._2, Suit.clubs).player("Junit");
 
-        Assertions.assertThat(hand.getCards()).hasSize(5);
+        assertThat(hand.getCards()).hasSize(5);
+        assertCard(hand.getCards().get(0), Value._2, Suit.clubs);
+        assertCard(hand.getCards().get(1), Value._2, Suit.clubs);
+        assertCard(hand.getCards().get(2), Value._2, Suit.clubs);
+        assertCard(hand.getCards().get(3), Value._2, Suit.clubs);
+        assertCard(hand.getCards().get(4), Value.Ace, Suit.heart);
+        assertThat(hand.getPlayerName()).isEqualTo("Junit");
+    }
 
-        Assertions.assertThat(hand.getCards().get(0).getValue()).isEqualTo(Value._2);
-        Assertions.assertThat(hand.getCards().get(0).getSuit()).isEqualTo(Suit.clubs);
-
-        Assertions.assertThat(hand.getCards().get(1).getValue()).isEqualTo(Value._2);
-        Assertions.assertThat(hand.getCards().get(1).getSuit()).isEqualTo(Suit.clubs);
-
-        Assertions.assertThat(hand.getCards().get(2).getValue()).isEqualTo(Value._2);
-        Assertions.assertThat(hand.getCards().get(2).getSuit()).isEqualTo(Suit.clubs);
-
-        Assertions.assertThat(hand.getCards().get(3).getValue()).isEqualTo(Value._2);
-        Assertions.assertThat(hand.getCards().get(3).getSuit()).isEqualTo(Suit.clubs);
-
-        Assertions.assertThat(hand.getCards().get(4).getValue()).isEqualTo(Value.Ace);
-        Assertions.assertThat(hand.getCards().get(4).getSuit()).isEqualTo(Suit.heart);
-
-        Assertions.assertThat(hand.getPlayerName()).isEqualTo("Junit");
+    private void assertCard(Card actual, Value expectedValue, Suit expectedSuit) {
+        assertThat(actual.getValue()).isEqualTo(expectedValue);
+        assertThat(actual.getSuit()).isEqualTo(expectedSuit);
     }
 
     @Test
