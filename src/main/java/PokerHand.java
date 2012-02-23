@@ -1,4 +1,3 @@
-import static com.google.common.base.Joiner.on;
 import static com.google.common.collect.Iterables.transform;
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -7,28 +6,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Lists;
+import com.google.common.base.Joiner;
 
-public class Hand {
+public class PokerHand {
 
     private List<Card> cards;
     private String playerName;
 
-    public Hand() {
+    public PokerHand() {
         this.cards = newArrayList();
     }
 
-    public static Hand hand() {
-        return new Hand();
+    public static PokerHand hand() {
+        return new PokerHand();
     }
 
-    public Hand addCard(Value value, Suit suit) {
+    public PokerHand addCard(Value value, Suit suit) {
         Card card = new Card(value, suit);
         this.cards.add(card);
         return this;
     }
 
-    public Hand player(String playerName) throws IllegalStateException {
+    public PokerHand player(String playerName) throws IllegalStateException {
         if (this.cards.size() != 5) {
             throw new IllegalSelectorException();
         }
@@ -62,12 +61,12 @@ public class Hand {
     public Boolean hasStraightFlush_guava() {
         Suit expectedSuit = cards.get(0).getSuit();
         int minValue = cards.get(0).getValue().ordinal();
-        ArrayList<String> expectedFlush = Lists.newArrayList();
+        ArrayList<String> expectedFlush = newArrayList();
         for (int i = 0; i < 5; i++) {
             expectedFlush.add((minValue + i) + ":" + expectedSuit);
         }
-        String expected = on(',').join(expectedFlush);
-        String actual = on(',').join(transform(cards, new Function<Card, String>() {
+        String expected = Joiner.on(',').join(expectedFlush);
+        String actual = Joiner.on(',').join(transform(cards, new Function<Card, String>() {
             public String apply(Card input) {
                 return input.getValue().ordinal() + ":" + input.getSuit().name();
             }
