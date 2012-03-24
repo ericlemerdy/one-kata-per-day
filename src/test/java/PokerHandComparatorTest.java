@@ -6,16 +6,17 @@ public class PokerHandComparatorTest {
 
     @Test
     public void should_win_with_high_card() {
-        PokerHandComparator pokerHand = new PokerHandComparator(PokerHand.hand().addCard(null, null) //
+        Deck deck = new Deck(PokerHand.hand().addCard(null, null) //
                 .addCard(Value._3, Suit.diamond) //
                 .addCard(Value._5, Suit.spades) //
                 .addCard(Value._9, Suit.clubs) //
-                .addCard(Value.King, Suit.diamond).player("Black"), //
+                .addCard(Value.King, Suit.diamond).player(), //
                 PokerHand.hand().addCard(Value._2, Suit.heart) //
                         .addCard(Value._3, Suit.heart) //
                         .addCard(Value._4, Suit.spades) //
                         .addCard(Value._8, Suit.clubs) //
-                        .addCard(Value.Ace, Suit.heart).player("White"));
+                        .addCard(Value.Ace, Suit.heart).player());
+        PokerHandComparator pokerHand = new PokerHandComparator(deck);
 
         Winner winner = pokerHand.compare();
         assertThat(winner.getPlayerName()).isEqualTo("White");

@@ -1,19 +1,9 @@
 public class PokerHandComparator {
 
-    private PokerHand player1;
-    private PokerHand player2;
+    private Deck deck;
 
-    public PokerHandComparator(PokerHand player1, PokerHand player2) {
-        this.player1 = player1;
-        this.player2 = player2;
-    }
-
-    public PokerHand getPlayer1() {
-        return player1;
-    }
-
-    public PokerHand getPlayer2() {
-        return player2;
+    public PokerHandComparator(Deck deck) {
+        this.deck = deck;
     }
 
     public Winner compare() {

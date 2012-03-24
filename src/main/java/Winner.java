@@ -1,6 +1,7 @@
 public class Winner {
 
     private String playerName;
+    
     private String reason;
 
     public Winner(String playerName, String reason) {

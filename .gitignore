@@ -1,5 +1,6 @@
 .classpath
+.idea/
 .project
 .settings/
+kata-poker-hand.iml
 target/
-
