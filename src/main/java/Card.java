@@ -1,6 +1,7 @@
 import com.google.common.base.Objects;
 
 import static com.google.common.base.Objects.equal;
+import static com.google.common.base.Objects.toStringHelper;
 
 public class Card {
 
@@ -25,8 +26,8 @@ public class Card {
     public boolean equals(Object other) {
         if (other instanceof Card) {
             Card otherCard = (Card) other;
-            return equal(this.getValue(), otherCard.getValue())
-                    && equal(this.getSuit(), otherCard.getSuit());
+            return equal(value, otherCard.getValue())
+                    && equal(suit, otherCard.getSuit());
         }
         return false;
     }
@@ -35,5 +36,9 @@ public class Card {
     public int hashCode() {
         return Objects.hashCode(value, suit);
     }
-
+    
+    @Override
+    public String toString() {
+        return new StringBuilder("Card{").append(value).append(" of ").append(suit).append("}").toString();
+    }
 }
