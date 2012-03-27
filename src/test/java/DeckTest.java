@@ -1,6 +1,7 @@
 import org.junit.Test;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -8,7 +9,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class DeckTest {
 
     @Test(expected = UnsupportedOperationException.class)
-    public void should_not_stole_a_card_from_a_deck() throws Exception {
+    public void should_not_remove_a_card_from_a_deck() throws Exception {
         Deck deck = new Deck();
         deck.getCards().remove(new Card(Value._2, Suit.club));
     }
@@ -88,14 +89,14 @@ public class DeckTest {
                 .addCard(Value._2, Suit.diamond) //
                 .addCard(Value._2, Suit.club) //
                 .addCard(Value._2, Suit.heart).player();
-        Set<Card> cards = hand.getCards();
+        List<Card> cards = hand.sortedHand();
 
         assertThat(cards).hasSize(5);
         Iterator<Card> cardIterator = cards.iterator();
-        assertThat(cardIterator.next().toString()).isEqualTo("Card{ace of heart}");
-        assertThat(cardIterator.next().toString()).isEqualTo("Card{2 of spade}");
-        assertThat(cardIterator.next().toString()).isEqualTo("Card{2 of diamond}");
-        assertThat(cardIterator.next().toString()).isEqualTo("Card{2 of club}");
         assertThat(cardIterator.next().toString()).isEqualTo("Card{2 of heart}");
+        assertThat(cardIterator.next().toString()).isEqualTo("Card{2 of diamond}");
+        assertThat(cardIterator.next().toString()).isEqualTo("Card{2 of spade}");
+        assertThat(cardIterator.next().toString()).isEqualTo("Card{2 of club}");
+        assertThat(cardIterator.next().toString()).isEqualTo("Card{ace of heart}");
     }
 }

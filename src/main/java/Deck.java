@@ -1,13 +1,12 @@
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
-import java.nio.channels.IllegalSelectorException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
 import static com.google.common.collect.Sets.newLinkedHashSet;
-import static java.util.Collections.disjoint;
 
 public class Deck {
 
@@ -26,13 +25,6 @@ public class Deck {
                 stock.add(new Card(value, suit));
             }
         }
-    }
-
-    private void checkUniqueCards() {
-        if (disjoint(this.black.getCards(), this.white.getCards())) {
-            return;
-        }
-        throw new IllegalArgumentException("Cards are not unique in hands");
     }
 
     public Set<Card> getCards() {
@@ -76,20 +68,22 @@ public class Deck {
             return this;
         }
 
-
         public PokerHand player() throws IllegalStateException {
             if (cards.size() != 5) {
-                throw new IllegalSelectorException();
+                throw new IllegalStateException();
             }
             return this;
         }
 
-        public Set<Card> getCards() {
-            return ImmutableSet.copyOf(cards);
+        public List<Card> sortedHand() {
+            List<Card> cards = newArrayList(this.cards);
+            Collections.sort(cards);
+            return cards;
         }
 
         public Boolean hasStraightFlush_plainJava() {
-            List<Card> cards = ImmutableList.copyOf(this.cards);
+            List<Card> cards = newArrayList(this.cards);
+            Collections.sort(cards);
             Suit expectedSuit = cards.get(0).getSuit();
             int minValue = cards.get(0).getValue().ordinal();
             for (int i = 1; i < 5; i++) {
