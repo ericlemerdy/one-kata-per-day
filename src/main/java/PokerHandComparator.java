@@ -1,3 +1,5 @@
+import model.Winner;
+
 public class PokerHandComparator {
 
     private Deck deck;

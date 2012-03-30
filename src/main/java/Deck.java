@@ -1,102 +1,91 @@
-import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.*;
+import model.*;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Sets.newHashSet;
-import static com.google.common.collect.Sets.newLinkedHashSet;
+import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Sets.*;
 
 public class Deck {
 
-    private PokerHand black;
+	private PokerHand black;
 
-    private PokerHand white;
+	private PokerHand white;
 
-    private Set<Card> stock;
+	private Set<Card> stock;
 
-    public Deck() {
-        stock = newHashSet();
-        for (int i = 0; i < Suit.values().length; i++) {
-            Suit suit = Suit.values()[i];
-            for (int j = 0; j < Value.values().length; j++) {
-                Value value = Value.values()[j];
-                stock.add(new Card(value, suit));
-            }
-        }
-    }
+	public Deck() {
+		stock = newHashSet();
+		for (Suit suit : Suit.values()) {
+			for (Value value : Value.values()) {
+				stock.add(new Card(value.toString() + suit.toCharacter()));
+			}
+		}
+	}
 
-    public Set<Card> getCards() {
-        return ImmutableSet.copyOf(stock);
-    }
+	public Set<Card> getCards() {
+		return ImmutableSet.copyOf(stock);
+	}
 
-    public PokerHand black() {
-        black = new PokerHand();
-        return black;
-    }
+	public PokerHand hand(String card1, String card2, String card3, String card4, String card5) {
+		black = new PokerHand(card1, card2, card3, card4, card5);
+		return black;
+	}
 
-    public PokerHand white() {
-        white = new PokerHand();
-        return white;
-    }
+	protected Card pickCardFromStock(String cardSpec) throws IllegalArgumentException {
+		Card requestedCard = new Card(cardSpec);
+		if (stock.contains(requestedCard)) {
+			for (Card card : getCards()) {
+				if (requestedCard.equals(card)) {
+					stock.remove(card);
+					return card;
+				}
+			}
+		}
+		throw new IllegalArgumentException("Card already distributed.");
+	}
 
-    protected Card pickCardFromStock(Value value, Suit suit) {
-        Card requestedCard = new Card(value, suit);
-        if (stock.contains(requestedCard)) {
-            for (Card card : getCards()) {
-                if (requestedCard.equals(card)) {
-                    stock.remove(card);
-                    return card;
-                }
-            }
-        }
-        throw new IllegalArgumentException("Card already distributed.");
-    }
+	class PokerHand {
 
-    class PokerHand {
+		private Set<Card> cards;
 
-        private Set<Card> cards;
+		public PokerHand(String card1, String card2, String card3, String card4, String card5) {
+			cards = newLinkedHashSet();
+			cards.add(pickCardFromStock(card1));
+			cards.add(pickCardFromStock(card2));
+			cards.add(pickCardFromStock(card3));
+			cards.add(pickCardFromStock(card4));
+			cards.add(pickCardFromStock(card5));
+		}
 
-        public PokerHand() {
-            cards = newLinkedHashSet();
-        }
+		public PokerHand black() {
+			return this;
+		}
 
-        public PokerHand addCard(Value value, Suit suit) {
-            Card card = pickCardFromStock(value, suit);
-            cards.add(card);
-            return this;
-        }
+		public PokerHand white() {
+			return this;
+		}
 
-        public PokerHand player() throws IllegalStateException {
-            if (cards.size() != 5) {
-                throw new IllegalStateException();
-            }
-            return this;
-        }
+		public List<Card> sortedHand() {
+			List<Card> cards = newArrayList(this.cards);
+			Collections.sort(cards);
+			return cards;
+		}
 
-        public List<Card> sortedHand() {
-            List<Card> cards = newArrayList(this.cards);
-            Collections.sort(cards);
-            return cards;
-        }
-
-        public Boolean hasStraightFlush_plainJava() {
-            List<Card> cards = newArrayList(this.cards);
-            Collections.sort(cards);
-            Suit expectedSuit = cards.get(0).getSuit();
-            int minValue = cards.get(0).getValue().ordinal();
-            for (int i = 1; i < 5; i++) {
-                Card card = cards.get(i);
-                if (card.getValue().ordinal() != minValue + i) {
-                    return false;
-                }
-                if (card.getSuit() != expectedSuit) {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-    }
+		public Boolean hasStraightFlush_plainJava() {
+			List<Card> sortedHand = sortedHand();
+			Suit expectedSuit = sortedHand.get(0).getSuit();
+			int minValue = sortedHand.get(0).getValue().ordinal();
+			for (int i = 1; i < 5; i++) {
+				Card card = sortedHand.get(i);
+				if (card.getValue().ordinal() != minValue + i) {
+					return false;
+				}
+				if (card.getSuit() != expectedSuit) {
+					return false;
+				}
+			}
+			return true;
+		}
+	}
 }

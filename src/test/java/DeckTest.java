@@ -1,102 +1,79 @@
-import org.junit.Test;
+import com.google.common.base.*;
+import model.*;
+import org.junit.*;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static com.google.common.collect.Lists.*;
+import static org.fest.assertions.Assertions.*;
 
 public class DeckTest {
 
-    @Test(expected = UnsupportedOperationException.class)
-    public void should_not_remove_a_card_from_a_deck() throws Exception {
-        Deck deck = new Deck();
-        deck.getCards().remove(new Card(Value._2, Suit.club));
-    }
+	@Test(expected = UnsupportedOperationException.class)
+	public void with_a_deck_should_not_remove_a_card() throws Exception {
+		Deck deck = new Deck();
+		deck.getCards().remove(new Card("2♣"));
+	}
 
-    @Test
-    public void a_deck_should_contain_all_card() throws Exception {
-        Deck deck = new Deck();
-        assertThat(deck.getCards()).hasSize(52);
-        assertThat(deck.getCards()).containsOnly(new Card(Value._2, Suit.club),
-                new Card(Value._3, Suit.club),
-                new Card(Value._4, Suit.club),
-                new Card(Value._5, Suit.club),
-                new Card(Value._6, Suit.club),
-                new Card(Value._7, Suit.club),
-                new Card(Value._8, Suit.club),
-                new Card(Value._9, Suit.club),
-                new Card(Value._10, Suit.club),
-                new Card(Value.Jack, Suit.club),
-                new Card(Value.Queen, Suit.club),
-                new Card(Value.King, Suit.club),
-                new Card(Value.Ace, Suit.club),
-                new Card(Value._2, Suit.heart),
-                new Card(Value._3, Suit.heart),
-                new Card(Value._4, Suit.heart),
-                new Card(Value._5, Suit.heart),
-                new Card(Value._6, Suit.heart),
-                new Card(Value._7, Suit.heart),
-                new Card(Value._8, Suit.heart),
-                new Card(Value._9, Suit.heart),
-                new Card(Value._10, Suit.heart),
-                new Card(Value.Jack, Suit.heart),
-                new Card(Value.Queen, Suit.heart),
-                new Card(Value.King, Suit.heart),
-                new Card(Value.Ace, Suit.heart),
-                new Card(Value._2, Suit.diamond),
-                new Card(Value._3, Suit.diamond),
-                new Card(Value._4, Suit.diamond),
-                new Card(Value._5, Suit.diamond),
-                new Card(Value._6, Suit.diamond),
-                new Card(Value._7, Suit.diamond),
-                new Card(Value._8, Suit.diamond),
-                new Card(Value._9, Suit.diamond),
-                new Card(Value._10, Suit.diamond),
-                new Card(Value.Jack, Suit.diamond),
-                new Card(Value.Queen, Suit.diamond),
-                new Card(Value.King, Suit.diamond),
-                new Card(Value.Ace, Suit.diamond),
-                new Card(Value._2, Suit.spade),
-                new Card(Value._3, Suit.spade),
-                new Card(Value._4, Suit.spade),
-                new Card(Value._5, Suit.spade),
-                new Card(Value._6, Suit.spade),
-                new Card(Value._7, Suit.spade),
-                new Card(Value._8, Suit.spade),
-                new Card(Value._9, Suit.spade),
-                new Card(Value._10, Suit.spade),
-                new Card(Value.Jack, Suit.spade),
-                new Card(Value.Queen, Suit.spade),
-                new Card(Value.King, Suit.spade),
-                new Card(Value.Ace, Suit.spade));
-    }
+	@Test
+	public void with_a_deck_should_contain_all_cards() throws Exception {
+		Deck deck = new Deck();
+		assertThat(deck.getCards()).hasSize(52);
+		assertThat(transform(newArrayList(deck.getCards()), new Function<Card, String>() {
+			@Override
+			public String apply(Card o) {
+				return o.toString();
+			}
+		})).containsOnly("2♣", "3♣", "4♣", "5♣", "6♣", "7♣", "8♣", "9♣", "10♣", "J♣", "Q♣", "K♣", "A♣", "2♥", "3♥", "4♥", "5♥", "6♥", "7♥", "8♥", "9♥", "10♥", "J♥", "Q♥", "K♥", "A♥", "2♦", "3♦", "4♦", "5♦", "6♦", "7♦", "8♦", "9♦", "10♦", "J♦", "Q♦", "K♦", "A♦", "2♠", "3♠", "4♠", "5♠", "6♠", "7♠", "8♠", "9♠", "10♠", "J♠", "Q♠", "K♠", "A♠");
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void with_two_hands_should_not_distribute_the_same_card_twice() throws Exception {
-        Deck deck = new Deck();
-        Deck.PokerHand white = deck.black().addCard(Value._2, Suit.club).//
-                addCard(Value._3, Suit.club).addCard(Value._4, Suit.club).addCard(Value._5, Suit.club).addCard(Value._6, Suit.club).player();
-        Deck.PokerHand black = deck.white().addCard(Value._2, Suit.club).//
-                addCard(Value._3, Suit.club).addCard(Value._4, Suit.club).addCard(Value._5, Suit.club).addCard(Value._6, Suit.club).player();
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void with_two_hands_should_not_distribute_the_same_card_twice() throws Exception {
+		Deck deck = new Deck();
+		Deck.PokerHand white = deck.hand("2♣", "3♣", "4♣", "5♣", "6♣").black();
+		Deck.PokerHand black = deck.hand("2♣", "3♣", "4♣", "6♣", "6♣").white();
+	}
 
-    @Test
-    public void should_create_a_sorted_hand() {
-        Deck deck = new Deck();
-        Deck.PokerHand hand = deck.black().addCard(Value.Ace, Suit.heart) //
-                .addCard(Value._2, Suit.spade) //
-                .addCard(Value._2, Suit.diamond) //
-                .addCard(Value._2, Suit.club) //
-                .addCard(Value._2, Suit.heart).player();
-        List<Card> cards = hand.sortedHand();
+	@Test
+	public void should_create_a_sorted_hand() {
+		Deck deck = new Deck();
+		Deck.PokerHand hand = deck.hand("A♥", "2♠", "2♦", "2♣", "2♥").black();
+		List<Card> cards = hand.sortedHand();
 
-        assertThat(cards).hasSize(5);
-        Iterator<Card> cardIterator = cards.iterator();
-        assertThat(cardIterator.next().toString()).isEqualTo("Card{2 of heart}");
-        assertThat(cardIterator.next().toString()).isEqualTo("Card{2 of diamond}");
-        assertThat(cardIterator.next().toString()).isEqualTo("Card{2 of spade}");
-        assertThat(cardIterator.next().toString()).isEqualTo("Card{2 of club}");
-        assertThat(cardIterator.next().toString()).isEqualTo("Card{ace of heart}");
-    }
+		assertThat(cards).hasSize(5);
+		Iterator<Card> cardIterator = cards.iterator();
+		assertThat(cardIterator.next().toString()).isEqualTo("2♥");
+		assertThat(cardIterator.next().toString()).isEqualTo("2♦");
+		assertThat(cardIterator.next().toString()).isEqualTo("2♠");
+		assertThat(cardIterator.next().toString()).isEqualTo("2♣");
+		assertThat(cardIterator.next().toString()).isEqualTo("A♥");
+	}
+
+	@Test
+	public void with_a_straight_flush() {
+		Deck deck = new Deck();
+		Deck.PokerHand hand = deck.hand("7♦", "8♦", "9♦", "10♦", "J♦").black();
+
+		assertThat(hand.hasStraightFlush_plainJava()).isTrue();
+	}
+
+	@Test
+	public void with_an_unsorted_hand_should_recognize_straight_flush() {
+		Deck deck = new Deck();
+		Deck.PokerHand hand = deck.hand("7♦", "J♦", "9♦", "10♦", "8♦").black();
+
+		assertThat(hand.hasStraightFlush_plainJava()).isTrue();
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void should_not_create_a_hand_with_less_than_5_cards() {
+		Deck deck = new Deck();
+		deck.hand("10♣", null, null, null, null).black();
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void with_one_hand_should_not_distribute_the_same_card_twice() throws Exception {
+		Deck deck = new Deck();
+		deck.hand("1♣", "2♣", "3♣", "A♣", "A♣").black();
+	}
 }
