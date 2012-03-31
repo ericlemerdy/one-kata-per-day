@@ -16,4 +16,16 @@ public class PokerHandComparatorTest {
 		assertThat(winner.getPlayerName()).isEqualTo("White");
 		assertThat(winner.getReason()).isEqualTo("high card: A");
 	}
+
+	@Test
+	public void should_win_with_flush() throws Exception {
+		Deck deck = new Deck();
+		deck.blackHand("2♥", "4♠", "4♣", "2♦", "4♥");
+		deck.whiteHand("2♠", "8♠", "A♠", "Q♠", "3♠");
+		PokerHandComparator pokerHand = new PokerHandComparator(deck);
+
+		Winner winner = pokerHand.compare();
+		assertThat(winner.getPlayerName()).isEqualTo("White");
+		assertThat(winner.getReason()).isEqualTo("flush");
+	}
 }

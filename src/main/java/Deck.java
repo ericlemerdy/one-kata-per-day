@@ -1,8 +1,10 @@
+import com.google.common.base.*;
 import com.google.common.collect.*;
 import model.*;
 
 import java.util.*;
 
+import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
@@ -104,6 +106,16 @@ public class Deck {
 				}
 			}
 			return true;
+		}
+
+		public boolean hasFlush() {
+			final Suit sameSuit = getFirst(cards, null).getSuit();
+			return Iterables.all(this.cards, new Predicate<Card>() {
+				@Override
+				public boolean apply(Card card) {
+					return sameSuit.equals(card.getSuit());
+				}
+			});
 		}
 	}
 }
