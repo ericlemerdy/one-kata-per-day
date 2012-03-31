@@ -5,6 +5,7 @@ import java.util.*;
 
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
+import static java.util.Collections.*;
 
 public class Deck {
 
@@ -27,7 +28,12 @@ public class Deck {
 		return ImmutableSet.copyOf(stock);
 	}
 
-	public PokerHand hand(String card1, String card2, String card3, String card4, String card5) {
+	public PokerHand whiteHand(String card1, String card2, String card3, String card4, String card5) {
+		white = new PokerHand(card1, card2, card3, card4, card5);
+		return white;
+	}
+
+	public PokerHand blackHand(String card1, String card2, String card3, String card4, String card5) {
 		black = new PokerHand(card1, card2, card3, card4, card5);
 		return black;
 	}
@@ -45,6 +51,14 @@ public class Deck {
 		throw new IllegalArgumentException("Card already distributed.");
 	}
 
+	public PokerHand white() {
+		return this.white;
+	}
+
+	public PokerHand black() {
+		return this.black;
+	}
+
 	class PokerHand {
 
 		private Set<Card> cards;
@@ -58,22 +72,26 @@ public class Deck {
 			cards.add(pickCardFromStock(card5));
 		}
 
-		public PokerHand black() {
-			return this;
+		public List<Card> sortHandByValueAsc() {
+			List<Card> sortedCards = newArrayList(cards);
+			Comparator<? super Card> orderByValue = new Comparator<Card>() {
+				@Override
+				public int compare(Card card, Card card1) {
+					return 1 - card.getValue().compareTo(card1.getValue());
+				}
+			};
+			sort(sortedCards, orderByValue);
+			return sortedCards;
 		}
 
-		public PokerHand white() {
-			return this;
+		public List<Card> sortHandByValueThenSuit() {
+			List<Card> sortedCards = newArrayList(cards);
+			sort(sortedCards);
+			return sortedCards;
 		}
 
-		public List<Card> sortedHand() {
-			List<Card> cards = newArrayList(this.cards);
-			Collections.sort(cards);
-			return cards;
-		}
-
-		public Boolean hasStraightFlush_plainJava() {
-			List<Card> sortedHand = sortedHand();
+		public Boolean hasStraightFlush() {
+			List<Card> sortedHand = sortHandByValueThenSuit();
 			Suit expectedSuit = sortedHand.get(0).getSuit();
 			int minValue = sortedHand.get(0).getValue().ordinal();
 			for (int i = 1; i < 5; i++) {

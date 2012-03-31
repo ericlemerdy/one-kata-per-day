@@ -30,50 +30,50 @@ public class DeckTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void with_two_hands_should_not_distribute_the_same_card_twice() throws Exception {
 		Deck deck = new Deck();
-		Deck.PokerHand white = deck.hand("2♣", "3♣", "4♣", "5♣", "6♣").black();
-		Deck.PokerHand black = deck.hand("2♣", "3♣", "4♣", "6♣", "6♣").white();
+		Deck.PokerHand white = deck.blackHand("2♣", "3♣", "4♣", "5♣", "6♣");
+		Deck.PokerHand black = deck.whiteHand("2♣", "3♣", "4♣", "6♣", "6♣");
 	}
 
 	@Test
 	public void should_create_a_sorted_hand() {
 		Deck deck = new Deck();
-		Deck.PokerHand hand = deck.hand("A♥", "2♠", "2♦", "2♣", "2♥").black();
-		List<Card> cards = hand.sortedHand();
+		Deck.PokerHand hand = deck.blackHand("A♥", "2♠", "2♦", "2♣", "2♥");
+		List<Card> cards = hand.sortHandByValueAsc();
 
 		assertThat(cards).hasSize(5);
 		Iterator<Card> cardIterator = cards.iterator();
+		assertThat(cardIterator.next().toString()).isEqualTo("A♥");
 		assertThat(cardIterator.next().toString()).isEqualTo("2♥");
+		assertThat(cardIterator.next().toString()).isEqualTo("2♣");
 		assertThat(cardIterator.next().toString()).isEqualTo("2♦");
 		assertThat(cardIterator.next().toString()).isEqualTo("2♠");
-		assertThat(cardIterator.next().toString()).isEqualTo("2♣");
-		assertThat(cardIterator.next().toString()).isEqualTo("A♥");
 	}
 
 	@Test
 	public void with_a_straight_flush() {
 		Deck deck = new Deck();
-		Deck.PokerHand hand = deck.hand("7♦", "8♦", "9♦", "10♦", "J♦").black();
+		Deck.PokerHand hand = deck.blackHand("7♦", "8♦", "9♦", "10♦", "J♦");
 
-		assertThat(hand.hasStraightFlush_plainJava()).isTrue();
+		assertThat(hand.hasStraightFlush()).isTrue();
 	}
 
 	@Test
 	public void with_an_unsorted_hand_should_recognize_straight_flush() {
 		Deck deck = new Deck();
-		Deck.PokerHand hand = deck.hand("7♦", "J♦", "9♦", "10♦", "8♦").black();
+		Deck.PokerHand hand = deck.blackHand("7♦", "J♦", "9♦", "10♦", "8♦");
 
-		assertThat(hand.hasStraightFlush_plainJava()).isTrue();
+		assertThat(hand.hasStraightFlush()).isTrue();
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void should_not_create_a_hand_with_less_than_5_cards() {
 		Deck deck = new Deck();
-		deck.hand("10♣", null, null, null, null).black();
+		deck.blackHand("10♣", null, null, null, null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void with_one_hand_should_not_distribute_the_same_card_twice() throws Exception {
 		Deck deck = new Deck();
-		deck.hand("1♣", "2♣", "3♣", "A♣", "A♣").black();
+		deck.blackHand("1♣", "2♣", "3♣", "A♣", "A♣");
 	}
 }
