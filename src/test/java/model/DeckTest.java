@@ -1,5 +1,6 @@
+package model;
+
 import com.google.common.base.*;
-import model.*;
 import org.junit.*;
 
 import java.util.*;
@@ -75,5 +76,13 @@ public class DeckTest {
 	public void with_one_hand_should_not_distribute_the_same_card_twice() throws Exception {
 		Deck deck = new Deck();
 		deck.blackHand("1♣", "2♣", "3♣", "A♣", "A♣");
+	}
+
+	@Test
+	public void should_find_pairs() throws Exception {
+		Deck deck = new Deck();
+		deck.blackHand("2♣", "2♦", "3♣", "3♦", "4♣");
+
+		assertThat(deck.black().pairs()).containsOnly(Value._2, Value._3);
 	}
 }

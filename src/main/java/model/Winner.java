@@ -2,21 +2,21 @@ package model;
 
 public class Winner {
 
-    private String playerName;
-    
-    private String reason;
+	private String playerName;
 
-    public Winner(String playerName, String reason) {
-        this.playerName = playerName;
-        this.reason = reason;
-    }
+	private String reason;
 
-    public String getPlayerName() {
-        return playerName;
-    }
+	public Winner(String playerName, String reason) {
+		this.playerName = playerName;
+		this.reason = reason;
+	}
 
-    public String getReason() {
-        return reason;
-    }
+	public String getPlayerName() {
+		return playerName;
+	}
+
+	public String getReason() {
+		return reason;
+	}
 
 }

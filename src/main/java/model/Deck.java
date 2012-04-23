@@ -1,6 +1,7 @@
+package model;
+
 import com.google.common.base.*;
 import com.google.common.collect.*;
-import model.*;
 
 import java.util.*;
 
@@ -61,7 +62,7 @@ public class Deck {
 		return this.black;
 	}
 
-	class PokerHand {
+	public class PokerHand {
 
 		private Set<Card> cards;
 
@@ -116,6 +117,33 @@ public class Deck {
 					return sameSuit.equals(card.getSuit());
 				}
 			});
+		}
+
+		public boolean hasOnePair() {
+			return pairs().size() == 1;
+		}
+
+		public Value firstPairValue() {
+			return pairs().get(0);
+		}
+
+		protected List<Value> pairs() {
+			HashMap<Value, List<Suit>> cardsPerValue = Maps.newHashMap();
+			for (Card card : this.cards) {
+				if (!cardsPerValue.containsKey(card.getValue())) {
+					cardsPerValue.put(card.getValue(), Lists.<Suit>newArrayList());
+				}
+				cardsPerValue.get(card.getValue()).add(card.getSuit());
+			}
+			List<Value> pairs = newArrayList();
+			Iterator<Value> iterator = cardsPerValue.keySet().iterator();
+			while (iterator.hasNext()) {
+				Value next = iterator.next();
+				if (cardsPerValue.get(next).size() == 2) {
+					pairs.add(next);
+				}
+			}
+			return pairs;
 		}
 	}
 }
