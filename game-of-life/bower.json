@@ -1,0 +1,13 @@
+{
+  "name": "game-of-life",
+  "version": "0.0.1",
+  "authors": [
+    "Éric Le Merdy <eric.lemerdy@laposte.net>"
+  ],
+  "main": "index.html",
+  "private": true,
+  "dependencies": {
+    "components-jasmine": "~2.0.0",
+    "jasmine-jquery": "~2.0.3"
+  }
+}

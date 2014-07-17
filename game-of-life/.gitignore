@@ -1,0 +1,5 @@
+bower_components/
+java/.idea/
+java/target/
+.idea/
+java/*.iml

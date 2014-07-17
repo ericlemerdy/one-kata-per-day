@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Game of life</title>
+  <style>
+    .alive {
+    	background-color: black;
+    	width: 10px;
+    	height: 10px;
+    }
+    .dead {
+    	background-color: white;
+    	width: 10px;
+    	height: 10px;
+    }
+    #grid td {
+      border: 1px solid #333;
+    }
+  </style>
+</head>
+<body>
+  <div>Grille : <input type="number" id="y" name="y" value="4" min="1" max="100" /> x <input type="number" id="x" name="x" value="8" min="1" max="100" />
+  <table id="grid"></table>
+  <button id="start-generation-button">start</button>
+  <button id="stop-generation-button">stop</button>
+  <script src="jquery.min.js"></script>
+  <script src="game-of-life.js"></script>
+  <script>
+$(document).ready(function() {
+  $("#start-generation-button").on("click", startTimer);
+  $("#stop-generation-button").on("click", abortTimer);
+  $("#x").on("change", createGrid);
+  $("#y").on("change", createGrid);
+  createGrid();
+});
+  </script>
+</body>
+</html>
