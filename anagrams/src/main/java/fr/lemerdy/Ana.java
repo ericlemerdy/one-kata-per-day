@@ -1,11 +1,8 @@
 package fr.lemerdy;
 
-import com.google.common.collect.Sets;
-
-import java.util.HashSet;
-import java.util.Set;
-
 import static com.google.common.collect.Sets.newHashSet;
+
+import java.util.Set;
 
 public class Ana {
     public static Set<String> grams(String input) {
