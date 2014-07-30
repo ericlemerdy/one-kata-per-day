@@ -62,9 +62,6 @@ public class Grid {
 
     @Override
     public String toString() {
-
-        // return cells.stream().map(cellList -> cellList.stream().map(cell -> cell.toString()).collect(Collectors.joining(" ", "", "\n")));
-
         StringBuffer out = new StringBuffer();
         for (List<Cell> cell : cells) {
             out.append(cell.stream().map(cel -> cel.toString()));
