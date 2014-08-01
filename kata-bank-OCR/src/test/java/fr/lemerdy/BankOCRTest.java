@@ -35,6 +35,15 @@ public class BankOCRTest {
 	}
 
 	@Test
+	public void should_parse_four() {
+		List<Integer> parsedInput = BankOCR.parse("" //
+				+ "   \n" //
+				+ "|_|\n" //
+				+ "  |");
+		assertThat(parsedInput).containsExactly(4);
+	}
+
+	@Test
 	public void should_parse_2_numbers() {
 		List<Integer> parsedInput = BankOCR.parse("" //
 				+ "      \n" //
