@@ -1,7 +1,7 @@
 package com.codurance.builders;
 
-import com.codurance.solid.Basket;
-import com.codurance.solid.Book;
+import com.codurance.solid.model.Basket;
+import com.codurance.solid.model.book.Book;
 
 public class BasketBuilder {
 

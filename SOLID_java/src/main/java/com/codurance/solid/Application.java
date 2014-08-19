@@ -1,6 +1,9 @@
 package com.codurance.solid;
 
-import static com.codurance.solid.BookType.*;
+import static com.codurance.solid.model.book.BookType.*;
+
+import com.codurance.solid.model.Basket;
+import com.codurance.solid.model.book.Book;
 
 public class Application {
 

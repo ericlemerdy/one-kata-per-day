@@ -1,45 +1,34 @@
-package com.codurance.solid;
+package com.codurance.solid.model;
 
-import java.util.ArrayList;
+import static java.lang.Math.round;
+
 import java.util.List;
 
-import static com.codurance.solid.BookType.IT;
-import static com.codurance.solid.BookType.TRAVEL;
-import static java.lang.Math.round;
-import static java.util.Collections.unmodifiableList;
+import com.codurance.solid.infrastructure.book.BookList;
+import com.codurance.solid.model.book.Book;
+import com.codurance.solid.model.book.Books;
 
 public class Basket {
 
-	private List<Book> books = new ArrayList<>();
+	private Books books = new BookList();
 
 	public void add(Book item) {
 		books.add(item);
 	}
 
 	public List<Book> books() {
-		return unmodifiableList(books);
+		return books.all();
 	}
 
 	public double priceWithDiscount() {
 		double it_books_discount = 0;
 		double travel_books_discount = 0;
-		double number_of_it_books = 0;
-		double number_of_travel_books = 0;
-		double total_price_for_it_books = 0;
-		double total_price_for_travel_books = 0;
-		double total_price_for_other_books = 0;
+		double number_of_it_books = books.numberOfITBooks();
+		double number_of_travel_books = books.numberOfTravelBooks();
+		double total_price_for_it_books = books.totalPriceForITBooks();
+		double total_price_for_travel_books = books.totalPriceForTravelBooks();
+		double total_price_for_other_books = books.totalPriceForOtherBooks();
 
-		for (Book book : this.books) {
-			if (IT.equals(book.type())) {
-				number_of_it_books += 1;
-				total_price_for_it_books += book.price();
-			} else if (TRAVEL.equals(book.type())) {
-				number_of_travel_books += 1;
-				total_price_for_travel_books += book.price();
-			} else {
-				total_price_for_other_books += book.price();
-			}
-		}
 		if (number_of_it_books > 2) {
 			it_books_discount = 0.7; // 30% discount when buying more than 2 IT books
 		} else if (number_of_it_books > 0) {
@@ -62,7 +51,7 @@ public class Basket {
 
 	public double fullPrice() {
 		double price = 0;
-		for (Book book : books) {
+		for (Book book : books.all()) {
 			price += book.price();
 		}
 		return toDecimal(price);
