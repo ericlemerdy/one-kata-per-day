@@ -1,14 +1,16 @@
 package com.codurance.solid;
 
+import static com.codurance.builders.BasketBuilder.aBasket;
+import static com.codurance.builders.BookBuilder.aCookingBook;
+import static com.codurance.builders.BookBuilder.aTravelBook;
+import static com.codurance.builders.BookBuilder.anITBook;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+
 import org.junit.Test;
 
 import com.codurance.solid.model.Basket;
 import com.codurance.solid.model.book.Book;
-
-import static com.codurance.builders.BasketBuilder.aBasket;
-import static com.codurance.builders.BookBuilder.*;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 
 public class BasketShould {
 

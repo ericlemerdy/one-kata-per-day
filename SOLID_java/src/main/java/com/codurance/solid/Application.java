@@ -1,6 +1,9 @@
 package com.codurance.solid;
 
-import static com.codurance.solid.model.book.BookType.*;
+import static com.codurance.solid.model.book.BookType.COOKING;
+import static com.codurance.solid.model.book.BookType.FANTASY;
+import static com.codurance.solid.model.book.BookType.IT;
+import static com.codurance.solid.model.book.BookType.TRAVEL;
 
 import com.codurance.solid.model.Basket;
 import com.codurance.solid.model.book.Book;

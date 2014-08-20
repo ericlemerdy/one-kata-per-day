@@ -8,14 +8,8 @@ public interface Books {
 
 	List<Book> all();
 
-	double numberOfITBooks();
+	double totalPriceFor(BookType bookType);
 
-	double numberOfTravelBooks();
-
-	double totalPriceForITBooks();
-
-	double totalPriceForTravelBooks();
-
-	double totalPriceForOtherBooks();
-
+	long countBy(BookType bookType);
+	
 }
