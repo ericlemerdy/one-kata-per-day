@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface Books {
 
-	void add(Book item);
+	void add(Book book);
 
 	List<Book> all();
 
