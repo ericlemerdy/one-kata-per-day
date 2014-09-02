@@ -17,6 +17,7 @@
 		<module>fibonacci</module>
 		<module>kata-bank-OCR</module>
 		<module>poker-hand</module>
+		<module>varint</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
