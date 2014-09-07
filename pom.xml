@@ -15,6 +15,7 @@
 		<module>anagrams</module>
 		<module>hundred-doors</module>
 		<module>fibonacci</module>
+		<module>game-of-life/java</module>
 		<module>kata-bank-OCR</module>
 		<module>poker-hand</module>
 		<module>varint</module>
