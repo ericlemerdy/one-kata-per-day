@@ -36,8 +36,8 @@ public class DeckTest {
   @Test(expected = IllegalArgumentException.class)
   public void with_two_hands_should_not_distribute_the_same_card_twice() throws Exception {
     Deck deck = new Deck();
-    Deck.PokerHand white = deck.blackHand("2♣", "3♣", "4♣", "5♣", "6♣");
-    Deck.PokerHand black = deck.whiteHand("2♣", "3♣", "4♣", "6♣", "6♣");
+    deck.blackHand("2♣", "3♣", "4♣", "5♣", "6♣");
+    deck.whiteHand("2♣", "3♣", "4♣", "6♣", "6♣");
   }
 
   @Test
