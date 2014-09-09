@@ -6,6 +6,10 @@ import org.junit.Test;
 
 public class AnagramTest {
   @Test
+  public void anagrams_of_empty_string_should_be_empty() throws Exception {
+      assertThat(Ana.grams("")).isEmpty();
+  }
+  @Test
   public void anagrams_of_a_should_be_a() throws Exception {
     assertThat(Ana.grams("a")).containsOnly("a");
   }
