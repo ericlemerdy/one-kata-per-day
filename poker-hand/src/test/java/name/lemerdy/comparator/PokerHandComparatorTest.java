@@ -1,9 +1,9 @@
 package name.lemerdy.comparator;
 
-import static org.fest.assertions.Assertions.assertThat;
 import name.lemerdy.model.Deck;
-
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PokerHandComparatorTest {
 
