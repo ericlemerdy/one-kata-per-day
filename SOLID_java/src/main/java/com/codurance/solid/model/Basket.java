@@ -1,18 +1,17 @@
 package com.codurance.solid.model;
 
-import static com.codurance.solid.model.discount.Discounter.priceAfterDiscount;
 import static java.lang.Math.round;
 
 import java.util.List;
 
 import com.codurance.solid.infrastructure.book.BookList;
 import com.codurance.solid.model.book.Book;
-import com.codurance.solid.model.book.BookType;
 import com.codurance.solid.model.book.Books;
 
 public class Basket {
 
-	private Books books = new BookList();
+    private final DiscountCalculator discountCalculator = new DiscountCalculator();
+    private Books books = new BookList();
 
 	public void add(Book item) {
 		books.add(item);
@@ -23,17 +22,8 @@ public class Basket {
 	}
 
 	public double priceWithDiscount() {
-
-		double totalPrice = 0.0;
-		for (BookType bookType : BookType.values()) {
-			totalPrice += priceAfterDiscount( //
-					books.countBy(bookType), //
-					books.totalPriceFor(bookType), //
-					bookType.discount());
-		}
-		return toDecimal(totalPrice);
-
-	}
+        return discountCalculator.priceWithDiscount(books);
+    }
 
 	public double fullPrice() {
 		double price = 0;
@@ -43,7 +33,7 @@ public class Basket {
 		return toDecimal(price);
 	}
 
-	private double toDecimal(double number) {
+	protected static double toDecimal(double number) {
 		return round(number * 100) / 100.0;
 	}
 

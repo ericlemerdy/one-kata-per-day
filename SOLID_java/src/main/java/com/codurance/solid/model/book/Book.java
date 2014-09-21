@@ -3,7 +3,7 @@ package com.codurance.solid.model.book;
 import java.util.function.ToDoubleFunction;
 
 
-public class Book {
+public class Book implements Product {
 
 	private String name;
 	private BookType type;
@@ -16,15 +16,18 @@ public class Book {
 		this.price = price;
 	}
 
-	public String name() {
+	@Override
+    public String name() {
 		return name;
 	}
 
-	public BookType type() {
+	@Override
+    public BookType type() {
 		return type;
 	}
 
-	public double price() {
+	@Override
+    public double price() {
 		return price;
 	}
 
