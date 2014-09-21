@@ -1,12 +1,11 @@
 package com.codurance.solid;
 
 import static com.codurance.builders.BasketBuilder.aBasket;
-import static com.codurance.builders.BookBuilder.aCookingBook;
-import static com.codurance.builders.BookBuilder.aTravelBook;
-import static com.codurance.builders.BookBuilder.anITBook;
+import static com.codurance.builders.BookBuilder.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+import com.codurance.builders.BookBuilder;
 import org.junit.Test;
 
 import com.codurance.solid.model.Basket;
@@ -103,7 +102,15 @@ public class BasketShould {
 		assertThat(basket.priceWithDiscount(), is(51.0));
 	}
 
-	private Basket emptyBasket() {
+    @Test
+    public void give_30_percent_discount_per_Fantasy_book_for_2_Fantasy_book() throws Exception {
+        Basket basket = aBasket().with(aFantasyBook().costing(10.0).build(),
+                aFantasyBook().costing(20.0).build()).build();
+
+        assertThat(basket.priceWithDiscount(), is(21.0));
+    }
+
+    private Basket emptyBasket() {
 		return new Basket();
 	}
 
