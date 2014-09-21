@@ -7,6 +7,7 @@ import org.mockito.Mockito;
 
 import static name.lemerdy.ItemBuilder.oneItem;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.doReturn;
 
 public class ShoppingBasketShould {
 
@@ -26,7 +27,7 @@ public class ShoppingBasketShould {
         Item item = oneItem();
 
         Stock stock = new Stock();
-        Mockito.doReturn(true).when(stock.isItemInStock(item));
+        doReturn(true).when(stock.isItemInStock(item));
         new ShoppingBasket(item);
     }
 
