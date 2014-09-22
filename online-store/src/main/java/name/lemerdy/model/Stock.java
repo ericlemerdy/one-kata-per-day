@@ -1,4 +1,4 @@
-package name.lemerdy;
+package name.lemerdy.model;
 
 import name.lemerdy.model.Item;
 
