@@ -1,4 +1,3 @@
 package name.lemerdy.model;
 
-public interface Item {
-}
+public interface Item {}

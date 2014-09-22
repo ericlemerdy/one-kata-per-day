@@ -1,6 +1,5 @@
 package name.lemerdy;
 
-import name.lemerdy.ShoppingBasket;
 import name.lemerdy.model.Stock;
 import name.lemerdy.model.Item;
 import org.junit.Test;
@@ -10,7 +9,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import static name.lemerdy.ItemBuilder.oneItem;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.doReturn;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ShoppingBasketShould {
@@ -31,8 +29,8 @@ public class ShoppingBasketShould {
 
     @Test
     public void with_one_item_not_in_stock_and_another_one_in_stock_all_items_should_not_be_in_stock() {
-        Item itemInStock = oneItem().simulateInStock(true).build();
-        Item itemNotInStock = oneItem().simulateInStock(false).build();
+        Item itemInStock = oneItem().in(stock).build();
+        Item itemNotInStock = oneItem().notIn(stock).build();
 
         ShoppingBasket shoppingBasket = new ShoppingBasket(stock, itemInStock, itemNotInStock);
 

@@ -1,9 +1,5 @@
 package name.lemerdy.model;
 
-import name.lemerdy.model.Item;
-
-public class Stock {
-    public boolean isItemInStock(Item item) {
-        return true;
-    }
+public interface Stock {
+    boolean isItemInStock(Item item);
 }
