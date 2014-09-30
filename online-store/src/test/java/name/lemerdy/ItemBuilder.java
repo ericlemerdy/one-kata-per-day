@@ -1,11 +1,8 @@
 package name.lemerdy;
 
-import name.lemerdy.model.Item;
-import name.lemerdy.model.Stock;
-
-import java.util.stream.IntStream;
-
 import static org.mockito.Mockito.doReturn;
+import name.lemerdy.model.Item;
+import name.lemerdy.model.stock.Stock;
 
 public class ItemBuilder {
 
