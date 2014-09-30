@@ -1,4 +1,4 @@
-package name.lemerdy;
+package name.lemerdy.model;
 
 import static org.mockito.Mockito.doReturn;
 import name.lemerdy.model.Item;
@@ -9,10 +9,7 @@ public class ItemBuilder {
     Item item;
 
     public static ItemBuilder oneItem() {
-        ItemBuilder itemBuilder = new ItemBuilder();
-        itemBuilder.item = new Item() {
-        };
-        return itemBuilder;
+        return new ItemBuilder();
     }
 
     public Item build() {
@@ -30,5 +27,16 @@ public class ItemBuilder {
 
     public ItemBuilder notIn(Stock stock) {
         return simulateInStock(false, stock);
+    }
+    
+    public ItemBuilder costing(final double price) {
+        item = new Item() {
+            
+            @Override
+            public double price() {
+                return price;
+            }
+        };
+        return this;
     }
 }
