@@ -7,13 +7,24 @@ import name.lemerdy.model.stock.Stock;
 public class ItemBuilder {
 
     Item item;
+    private String itemName;
+    private double price;
 
     public static ItemBuilder oneItem() {
         return new ItemBuilder();
     }
 
     public Item build() {
-        return item;
+        return new Item() {
+            @Override
+            public double price() {
+                return price;
+            }
+            @Override
+            public String getName() {
+                return itemName;
+            }
+        };
     }
 
     private ItemBuilder simulateInStock(boolean isInStock, Stock stock) {
@@ -30,13 +41,12 @@ public class ItemBuilder {
     }
     
     public ItemBuilder costing(final double price) {
-        item = new Item() {
-            
-            @Override
-            public double price() {
-                return price;
-            }
-        };
+        this.price = price;
+        return this;
+    }
+
+    public ItemBuilder named(String itemName) {
+        this.itemName = itemName;
         return this;
     }
 }
