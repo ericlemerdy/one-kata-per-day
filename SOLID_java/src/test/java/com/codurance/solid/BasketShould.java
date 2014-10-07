@@ -49,14 +49,14 @@ public class BasketShould {
 		assertThat(basket.fullPrice(), is(80.0));
 	}
 
-	@Test
-	public void give_30_percent_discount_for_IT_books_when_containing_more_than_two_of_them() {
-		Basket basket = aBasket().with(anITBook().costing(30.0).build(),
-				anITBook().costing(10.0).build(),
-				anITBook().costing(20.0).build()).build();
+    @Test
+    public void give_30_percent_discount_for_IT_books_when_containing_more_than_two_of_them() {
+        Basket basket = aBasket().with(anITBook().costing(30.0).build(),
+                anITBook().costing(10.0).build(),
+                anITBook().costing(20.0).build()).build();
 
-		assertThat(basket.priceWithDiscount(), is(42.0));
-	}
+        assertThat(basket.priceWithDiscount(), is(42.0));
+    }
 
 	@Test
 	public void give_10_percent_discount_for_IT_books_when_containing_on_of_them() {
@@ -105,11 +105,11 @@ public class BasketShould {
 	}
 
     @Test
-    public void give_30_percent_discount_per_Fantasy_book_for_2_Fantasy_book() throws Exception {
-        Basket basket = aBasket().with(aFantasyBook().costing(10.0).build(),
-                aFantasyBook().costing(20.0).build()).build();
+    public void give_20_percent_discount_per_Fantasy_book_for_2_Fantasy_book() throws Exception {
+        Basket basket = aBasket().with(aFantasyBook().costing(15.0).build(),
+                aFantasyBook().costing(5.0).build()).build();
 
-        assertThat(basket.priceWithDiscount(), is(21.0));
+        assertThat(basket.priceWithDiscount(), is(16.0));
     }
 
     private Basket emptyBasket() {

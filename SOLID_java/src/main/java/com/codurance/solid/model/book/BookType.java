@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableList;
 public enum BookType {
 
 	COOKING(ImmutableList.<DiscountRange>of()),
-	FANTASY(ImmutableList.of(new DiscountRange(1, MAX_VALUE, 0.3))),
+	FANTASY(ImmutableList.of(new DiscountRange(1, MAX_VALUE, 0.2))),
 	IT(ImmutableList.of(new DiscountRange(2, MAX_VALUE, 0.3), new DiscountRange(0, 2, 0.1))), //
 	TRAVEL(ImmutableList.of(new DiscountRange(3, MAX_VALUE, 0.4)));
 
