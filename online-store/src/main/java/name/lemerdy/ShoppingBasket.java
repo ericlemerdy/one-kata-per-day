@@ -5,6 +5,7 @@ import name.lemerdy.model.payment.PaymentGateway;
 import name.lemerdy.model.payment.PaymentStatus;
 import name.lemerdy.model.stock.Stock;
 
+import java.util.OptionalDouble;
 import java.util.Set;
 
 import static com.google.common.collect.Sets.newHashSet;
@@ -16,11 +17,14 @@ public class ShoppingBasket {
     private Set<Item> items;
     private Stock stock;
     private PaymentGateway paymentGateway;
+    private EmailNotification emailNotification;
 
-    public ShoppingBasket(Stock stock, PaymentGateway paymentGateway, Item... items) {
-        this.paymentGateway = paymentGateway;
-        this.items = unmodifiableSet(newHashSet(asList(items)));
+    public ShoppingBasket(Stock stock, PaymentGateway paymentGateway, EmailNotification emailNotification,
+            Item... items) {
         this.stock = stock;
+        this.paymentGateway = paymentGateway;
+        this.emailNotification = emailNotification;
+        this.items = unmodifiableSet(newHashSet(asList(items)));
     }
 
     public Iterable<Item> items() {
@@ -36,6 +40,15 @@ public class ShoppingBasket {
     }
 
     public PaymentStatus pay(String creditCardNumber, String owner, String date) {
-        return paymentGateway.send(creditCardNumber, owner, date);
+        return paymentGateway.send(creditCardNumber, owner, date, basketPrice().getAsDouble());
+    }
+
+    public void sendNotification(String userEmail) {
+        OptionalDouble reduce = basketPrice();
+        emailNotification.sendPaymentConfirmation(userEmail, reduce.getAsDouble());
+    }
+
+    private OptionalDouble basketPrice() {
+        return items.stream().mapToDouble(i -> i.price()).reduce((p, s) -> p + s);
     }
 }
