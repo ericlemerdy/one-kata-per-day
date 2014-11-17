@@ -1,15 +1,8 @@
 package com.codurance.training.profitcalculator;
 
-import java.util.Map;
-
-import com.google.common.collect.ImmutableMap;
 
 public final class ProfitCalculator {
-    private static final Map<Currency,Double> EXCHANGE_RATES = ImmutableMap.<Currency, Double>builder()
-            .put(Currency.GBP, 1.0)
-            .put(Currency.USD, 1.6)
-            .put(Currency.EUR, 1.2)
-            .build();
+    private static final ExchangeRates EXCHANGE_RATES = new ExchangeRates();
 
     private final Currency localCurrency;
     private int localAmount = 0;
