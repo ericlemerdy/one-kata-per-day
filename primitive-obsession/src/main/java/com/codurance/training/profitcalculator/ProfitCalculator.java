@@ -1,28 +1,29 @@
 package com.codurance.training.profitcalculator;
 
 import java.util.Map;
+
 import com.google.common.collect.ImmutableMap;
 
 public final class ProfitCalculator {
-    private static final Map<String, Double> EXCHANGE_RATES = ImmutableMap.<String, Double>builder()
-            .put("GBP", 1.0)
-            .put("USD", 1.6)
-            .put("EUR", 1.2)
+    private static final Map<Currency,Double> EXCHANGE_RATES = ImmutableMap.<Currency, Double>builder()
+            .put(Currency.GBP, 1.0)
+            .put(Currency.USD, 1.6)
+            .put(Currency.EUR, 1.2)
             .build();
 
-    private final String localCurrency;
+    private final Currency localCurrency;
     private int localAmount = 0;
     private int foreignAmount = 0;
 
-    public ProfitCalculator(String localCurrency) {
-        this.localCurrency = localCurrency;
-        Double exchangeRate = EXCHANGE_RATES.get(localCurrency);
+    public ProfitCalculator(Currency gbp) {
+        this.localCurrency = gbp;
+        Double exchangeRate = EXCHANGE_RATES.get(gbp);
         if (exchangeRate == null) {
             throw new IllegalArgumentException("Invalid currency.");
         }
     }
 
-    public void add(int amount, String currency, boolean incoming) {
+    public void add(int amount, Currency currency, boolean incoming) {
         int realAmount = amount;
         Double exchangeRate = EXCHANGE_RATES.get(currency) / EXCHANGE_RATES.get(localCurrency);
         if (exchangeRate != null) {
