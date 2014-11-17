@@ -1,5 +1,6 @@
 package com.codurance.training.profitcalculator;
 
+import static com.codurance.training.profitcalculator.Money.anAmountOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -13,11 +14,11 @@ public final class ProfitCalculatorTest {
     calculates_the_tax_at_20_percent() {
         gbpCalculator.add(500, Currency.GBP, true);
 
-        int profit = gbpCalculator.calculateProfit();
-        int tax = gbpCalculator.calculateTax();
+        Money profit = gbpCalculator.calculateProfit();
+        Money tax = gbpCalculator.calculateTax();
 
-        assertThat(profit, is(400));
-        assertThat(tax, is(100));
+        assertThat(profit, is(anAmountOf(400)));
+        assertThat(tax, is(anAmountOf(100)));
     }
 
     @Test public void
@@ -25,11 +26,11 @@ public final class ProfitCalculatorTest {
         gbpCalculator.add(120, Currency.GBP, true);
         gbpCalculator.add(200, Currency.GBP, true);
 
-        int profit = gbpCalculator.calculateProfit();
-        int tax = gbpCalculator.calculateTax();
+        Money profit = gbpCalculator.calculateProfit();
+        Money tax = gbpCalculator.calculateTax();
 
-        assertThat(profit, is(256));
-        assertThat(tax, is(64));
+        assertThat(profit, is(anAmountOf(256)));
+        assertThat(tax, is(anAmountOf(64)));
     }
 
     @Test public void
@@ -37,11 +38,11 @@ public final class ProfitCalculatorTest {
         gbpCalculator.add(120, Currency.GBP, true);
         gbpCalculator.add(200, Currency.USD, true);
 
-        int profit = gbpCalculator.calculateProfit();
-        int tax = gbpCalculator.calculateTax();
+        Money profit = gbpCalculator.calculateProfit();
+        Money tax = gbpCalculator.calculateTax();
 
-        assertThat(profit, is(221));
-        assertThat(tax, is(24));
+        assertThat(profit, is(anAmountOf(221)));
+        assertThat(tax, is(anAmountOf(24)));
     }
 
     @Test public void
@@ -50,11 +51,11 @@ public final class ProfitCalculatorTest {
         gbpCalculator.add(80, Currency.USD, true);
         gbpCalculator.add(360, Currency.EUR, false);
 
-        int profit = gbpCalculator.calculateProfit();
-        int tax = gbpCalculator.calculateTax();
+        Money profit = gbpCalculator.calculateProfit();
+        Money tax = gbpCalculator.calculateTax();
 
-        assertThat(profit, is(150));
-        assertThat(tax, is(100));
+        assertThat(profit, is(anAmountOf(150)));
+        assertThat(tax, is(anAmountOf(100)));
     }
 
     @Test public void
@@ -64,11 +65,11 @@ public final class ProfitCalculatorTest {
         gbpCalculator.add(400, Currency.GBP, false);
         gbpCalculator.add(20, Currency.GBP, false);
 
-        int profit = gbpCalculator.calculateProfit();
-        int tax = gbpCalculator.calculateTax();
+        Money profit = gbpCalculator.calculateProfit();
+        Money tax = gbpCalculator.calculateTax();
 
-        assertThat(profit, is(-120));
-        assertThat(tax, is(0));
+        assertThat(profit, is(anAmountOf(-120)));
+        assertThat(tax, is(anAmountOf(0)));
     }
 
     @Test public void
@@ -77,13 +78,13 @@ public final class ProfitCalculatorTest {
         eurCalculator.add(200, Currency.USD, false);
         eurCalculator.add(200, Currency.EUR, true);
 
-        int profit = eurCalculator.calculateProfit();
-        int tax = eurCalculator.calculateTax();
+        Money profit = eurCalculator.calculateProfit();
+        Money tax = eurCalculator.calculateTax();
 
-        assertThat(profit, is(491));
-        assertThat(tax, is(40));
+        assertThat(profit, is(anAmountOf(491)));
+        assertThat(tax, is(anAmountOf(40)));
     }
-
+    
 	@Test(expected = IllegalArgumentException.class) public void
 	invalid_currency() {
 		new ProfitCalculator(Currency.FOO);
