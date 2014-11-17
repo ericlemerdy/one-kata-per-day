@@ -19,6 +19,7 @@
 		<module>kata-bank-OCR</module>
         <module>online-store</module>
 		<module>poker-hand</module>
+		<module>primitive-obsession</module>
 		<module>SOLID_java</module>
 		<module>varint</module>
 	</modules>

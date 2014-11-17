@@ -1,9 +1,9 @@
 package com.codurance.training.profitcalculator;
 
-import org.junit.Test;
-
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+
+import org.junit.Test;
 
 public final class ProfitCalculatorTest {
     private final ProfitCalculator gbpCalculator = new ProfitCalculator("GBP");
