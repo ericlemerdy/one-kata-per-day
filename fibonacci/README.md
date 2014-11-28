@@ -5,7 +5,7 @@ Fibonacci
 
 f(i) = f(i-2) + f(i-1)
 
-with f(0) = 1 and f(1) = 1
+with f(0) = 0 and f(1) = 1
 
 ## Exemple
 
