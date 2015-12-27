@@ -20,7 +20,7 @@
         <module>online-store</module>
 		<module>poker-hand</module>
 		<module>primitive-obsession</module>
-		<module>SOLID_java</module>
+		<module>SOLID</module>
 		<module>varint</module>
 		<module>adventofcode.com</module>
 	</modules>
