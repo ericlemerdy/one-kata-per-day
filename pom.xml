@@ -22,7 +22,7 @@
 		<module>primitive-obsession</module>
 		<module>SOLID</module>
 		<module>varint</module>
-		<module>adventofcode.com</module>
+		<module>adventofcode.com/seven</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
