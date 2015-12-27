@@ -7,3 +7,5 @@ One kata per day ?
  - https://github.com/jbrains/trivia
  - fizzbuzzkata
  - https://github.com/NotMyself/GildedRose
+ - https://exercism.io
+ - https://spoj.com
