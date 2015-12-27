@@ -8,6 +8,7 @@ import cucumber.api.PendingException;
 import cucumber.api.java.fr.Alors;
 import cucumber.api.java.fr.Lorsque;
 import cucumber.api.java.fr.Étantdonné;
+import name.lemerdy.eric.tennis.model.TennisGameInitialization;
 
 public class StepDef {
     private Set<String> players = new HashSet<String>();

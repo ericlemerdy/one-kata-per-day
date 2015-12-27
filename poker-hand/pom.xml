@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <url>http://codingdojo.org/cgi-bin/wiki.pl?KataPokerHands</url>
     <parent>
-        <groupId>fr.lemerdy</groupId>
+        <groupId>name.lemerdy.eric</groupId>
         <artifactId>one-kata-per-day</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>

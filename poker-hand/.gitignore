@@ -2,5 +2,5 @@
 .idea/
 .project
 .settings/
-kata-poker-hand.iml
+poker-hand.iml
 target/

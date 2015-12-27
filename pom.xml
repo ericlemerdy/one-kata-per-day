@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>fr.lemerdy</groupId>
+	<groupId>name.lemerdy.eric</groupId>
 	<artifactId>one-kata-per-day</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
@@ -12,6 +12,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 	<modules>
+		<module>adventofcode.com/seven</module>
 		<module>anagrams</module>
 		<module>fibonacci</module>
 		<module>game-of-life/java</module>
@@ -21,8 +22,8 @@
 		<module>poker-hand</module>
 		<module>primitive-obsession</module>
 		<module>SOLID</module>
+		<module>tennis-game</module>
 		<module>varint</module>
-		<module>adventofcode.com/seven</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
