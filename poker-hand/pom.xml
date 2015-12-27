@@ -6,7 +6,7 @@
         <artifactId>one-kata-per-day</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>kata-poker-hand</artifactId>
+    <artifactId>poker-hand</artifactId>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
