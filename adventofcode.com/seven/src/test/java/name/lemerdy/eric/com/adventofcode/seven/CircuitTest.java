@@ -1,7 +1,5 @@
 package name.lemerdy.eric.com.adventofcode.seven;
 
-import name.lemerdy.eric.com.adventofcode.seven.Signal;
-import name.lemerdy.eric.com.adventofcode.seven.Wire;
 import org.junit.Test;
 
 import java.util.Map;
@@ -16,18 +14,18 @@ public class CircuitTest {
     public void should_read_signal_on_a_wire() {
         Circuit circuit = new Circuit("123 -> x");
 
-        Optional<Signal> x = circuit.signal(new Wire("x"));
+        Optional<SignalProvider> x = circuit.resolveSignal(new Wire("x"));
 
-        assertThat(x).contains(new Signal(123));
+        assertThat(x).contains(new SpecificValue(123));
     }
 
     @Test
     public void should_read_another_signal_on_a_wire() {
         Circuit circuit = new Circuit("45 -> y");
 
-        Optional<Signal> y = circuit.signal(new Wire("y"));
+        Optional<SignalProvider> y = circuit.resolveSignal(new Wire("y"));
 
-        assertThat(y).contains(new Signal(45));
+        assertThat(y).contains(new SpecificValue(45));
     }
 
     @Test
@@ -36,19 +34,19 @@ public class CircuitTest {
                 "123 -> x\n" +
                         "456 -> y");
 
-        Map<Wire, Signal> signals = circuit.signals();
+        Map<Wire, SignalProvider> signals = circuit.signals();
 
         assertThat(signals).containsExactly(
-                entry(new Wire("x"), new Signal(123)),
-                entry(new Wire("y"), new Signal(456)));
+                entry(new Wire("x"), new SpecificValue(123)),
+                entry(new Wire("y"), new SpecificValue(456)));
     }
 
     @Test
     public void should_compute_AND_instruction() {
         Circuit circuit = new Circuit("123 AND 456 -> d");
 
-        Optional<Signal> d = circuit.signal(new Wire("d"));
+        Optional<SignalProvider> d = circuit.resolveSignal(new Wire("d"));
 
-        assertThat(d).contains(new Signal(72));
+        assertThat(d).contains(new SpecificValue(72));
     }
 }
