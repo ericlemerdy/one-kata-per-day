@@ -45,6 +45,16 @@ public class CircuitTest {
     }
 
     @Test
+    public void should_carry_signal_through_a_wire_with_another_wire() {
+        Circuit circuit = new Circuit("123 -> x\n" +
+                "x -> y");
+
+        Optional<SpecificValue> d = circuit.signalOf(new Wire("y"));
+
+        assertThat(d).contains(new SpecificValue(123));
+    }
+
+    @Test
     public void should_carry_signal_through_AND_gate_with_specific_value_at_left_and_specific_value_at_right() {
         Circuit circuit = new Circuit("123 AND 456 -> d");
 

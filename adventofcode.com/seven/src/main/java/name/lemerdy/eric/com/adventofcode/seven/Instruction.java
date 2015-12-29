@@ -22,6 +22,13 @@ public class Instruction {
             return;
         }
 
+        signalProvidedToWire = compile("(\\w+) -> (\\w+)").matcher(instruction);
+        if (signalProvidedToWire.matches()) {
+            signalCarrier = new Wire(signalProvidedToWire.group(1));
+            wire = new Wire(signalProvidedToWire.group(2));
+            return;
+        }
+
         signalProvidedToWire = compile("(\\d+) AND (\\d+) -> (\\w+)").matcher(instruction);
         if (signalProvidedToWire.matches()) {
             signalCarrier = new AndGate(
