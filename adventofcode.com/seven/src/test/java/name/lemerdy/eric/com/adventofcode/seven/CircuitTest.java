@@ -84,4 +84,14 @@ public class CircuitTest {
 
         assertThat(d).contains(new SpecificValue(492));
     }
+
+    @Test
+    public void should_carry_signal_through_RSHIFT_gate_with_wire_by_value() {
+        Circuit circuit = new Circuit("456 -> y\n" +
+                "y RSHIFT 2 -> g");
+
+        Optional<SpecificValue> d = circuit.signalOf(new Wire("g"));
+
+        assertThat(d).contains(new SpecificValue(114));
+    }
 }

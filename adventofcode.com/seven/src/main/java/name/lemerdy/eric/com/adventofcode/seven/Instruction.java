@@ -58,6 +58,15 @@ public class Instruction {
             return;
         }
 
+        signalProvidedToWire = compile("(\\w+) RSHIFT (\\d+) -> (\\w+)").matcher(instruction);
+        if (signalProvidedToWire.matches()) {
+            signalCarrier = new RShiftGate(
+                    new Wire(signalProvidedToWire.group(1)),
+                    Integer.valueOf(signalProvidedToWire.group(2)));
+            wire = new Wire(signalProvidedToWire.group(3));
+            return;
+        }
+
         throw new IllegalArgumentException("'" + instruction + "' is not parsable");
     }
 }
