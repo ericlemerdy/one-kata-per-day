@@ -14,7 +14,7 @@ public class CircuitTest {
     public void should_read_signal_on_a_wire() {
         Circuit circuit = new Circuit("123 -> x");
 
-        Optional<SignalProvider> x = circuit.resolveSignal(new Wire("x"));
+        Optional<SpecificValue> x = circuit.resolveSignal(new Wire("x"));
 
         assertThat(x).contains(new SpecificValue(123));
     }
@@ -23,7 +23,7 @@ public class CircuitTest {
     public void should_read_another_signal_on_a_wire() {
         Circuit circuit = new Circuit("45 -> y");
 
-        Optional<SignalProvider> y = circuit.resolveSignal(new Wire("y"));
+        Optional<SpecificValue> y = circuit.resolveSignal(new Wire("y"));
 
         assertThat(y).contains(new SpecificValue(45));
     }
@@ -42,10 +42,21 @@ public class CircuitTest {
     }
 
     @Test
-    public void should_compute_AND_instruction() {
+    public void should_compute_AND_instruction_with_specific_value_at_left_and_specific_value_right() {
         Circuit circuit = new Circuit("123 AND 456 -> d");
 
-        Optional<SignalProvider> d = circuit.resolveSignal(new Wire("d"));
+        Optional<SpecificValue> d = circuit.resolveSignal(new Wire("d"));
+
+        assertThat(d).contains(new SpecificValue(72));
+    }
+
+    @Test
+    public void should_compute_AND_instruction_with_wire_left_and_wire_right() {
+        Circuit circuit = new Circuit("123 -> x\n" +
+                "456 -> y\n" +
+                "x AND y -> d");
+
+        Optional<SpecificValue> d = circuit.resolveSignal(new Wire("d"));
 
         assertThat(d).contains(new SpecificValue(72));
     }

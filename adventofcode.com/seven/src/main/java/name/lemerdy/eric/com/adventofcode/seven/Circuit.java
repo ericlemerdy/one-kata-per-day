@@ -17,22 +17,16 @@ public class Circuit {
                 .collect(toList());
     }
 
-    public Optional<SignalProvider> resolveSignal(Wire wire) {
-        Optional<SignalProvider> first = circuit.stream()
-                .filter(i -> i.getWire().equals(wire))
+    public Optional<SpecificValue> resolveSignal(SignalProvider signalProvider) {
+        if (signalProvider instanceof SpecificValue) {
+            return Optional.of((SpecificValue) signalProvider);
+        }
+        Optional<SignalProvider> wire = circuit.stream()
+                .filter(i -> i.getWire().equals(signalProvider))
                 .map(Instruction::getSignalProvider)
                 .findFirst();
-        if (first.isPresent()) {
-            SignalProvider signalProvider = first.get();
-            if (signalProvider instanceof SpecificValue) {
-                return first;
-            }
-            if (signalProvider instanceof AndGate) {
-                AndGate firstGate = (AndGate) signalProvider;
-                SpecificValue left = (SpecificValue) firstGate.getLeft();
-                SpecificValue right = (SpecificValue) firstGate.getRight();
-                return Optional.of(new SpecificValue(left.getValue() & right.getValue()));
-            }
+        if (wire.isPresent()) {
+            return wire.get().resolve(this);
         }
         return Optional.empty();
     }
