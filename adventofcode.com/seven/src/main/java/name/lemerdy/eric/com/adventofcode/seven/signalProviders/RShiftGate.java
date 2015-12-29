@@ -2,8 +2,6 @@ package name.lemerdy.eric.com.adventofcode.seven.signalProviders;
 
 import lombok.Value;
 import name.lemerdy.eric.com.adventofcode.seven.Circuit;
-import name.lemerdy.eric.com.adventofcode.seven.signalProviders.SignalCarrier;
-import name.lemerdy.eric.com.adventofcode.seven.signalProviders.Wire;
 
 import java.util.Optional;
 

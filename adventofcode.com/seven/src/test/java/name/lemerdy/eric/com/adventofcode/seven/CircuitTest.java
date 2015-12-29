@@ -1,6 +1,5 @@
 package name.lemerdy.eric.com.adventofcode.seven;
 
-import name.lemerdy.eric.com.adventofcode.seven.signalProviders.SignalCarrier;
 import name.lemerdy.eric.com.adventofcode.seven.signalProviders.SpecificValue;
 import name.lemerdy.eric.com.adventofcode.seven.signalProviders.Wire;
 import org.junit.Test;
@@ -37,7 +36,7 @@ public class CircuitTest {
                 "123 -> x\n" +
                         "456 -> y");
 
-        Map<Wire, SignalCarrier> signals = circuit.signals();
+        Map<Wire, SpecificValue> signals = circuit.signals();
 
         assertThat(signals).containsExactly(
                 entry(new Wire("x"), new SpecificValue(123)),

@@ -7,6 +7,7 @@ import name.lemerdy.eric.com.adventofcode.seven.signalProviders.Wire;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
@@ -35,8 +36,9 @@ public class Circuit {
         return Optional.empty();
     }
 
-    public Map<Wire, SignalCarrier> signals() {
+    public Map<Wire, SpecificValue> signals() {
+        Circuit that = this;
         return circuit.stream()
-                .collect(toMap(Instruction::getWire, Instruction::getSignalCarrier));
+                .collect(toMap(Instruction::getWire, i -> i.getSignalCarrier().resolve(that).get()));
     }
 }
