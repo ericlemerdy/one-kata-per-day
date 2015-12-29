@@ -39,6 +39,15 @@ public class Instruction {
             return;
         }
 
+        signalProvidedToWire = compile("(\\w+) OR (\\w+) -> (\\w+)").matcher(instruction);
+        if (signalProvidedToWire.matches()) {
+            signalProvider = new OrGate(
+                    new Wire(signalProvidedToWire.group(1)),
+                    new Wire(signalProvidedToWire.group(2)));
+            wire = new Wire(signalProvidedToWire.group(3));
+            return;
+        }
+
         throw new IllegalArgumentException("'" + instruction + "' is not parsable");
     }
 }

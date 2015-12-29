@@ -60,4 +60,15 @@ public class CircuitTest {
 
         assertThat(d).contains(new SpecificValue(72));
     }
+
+    @Test
+    public void should_compute_OR_instruction_with_wire_left_and_wire_right() {
+        Circuit circuit = new Circuit("123 -> x\n" +
+                "456 -> y\n" +
+                "x OR y -> d");
+
+        Optional<SpecificValue> d = circuit.resolveSignal(new Wire("d"));
+
+        assertThat(d).contains(new SpecificValue(507));
+    }
 }
