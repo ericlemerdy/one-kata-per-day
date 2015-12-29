@@ -1,6 +1,7 @@
 package name.lemerdy.eric.com.adventofcode.seven;
 
 import lombok.Value;
+import name.lemerdy.eric.com.adventofcode.seven.signalProviders.*;
 
 import java.util.regex.Matcher;
 

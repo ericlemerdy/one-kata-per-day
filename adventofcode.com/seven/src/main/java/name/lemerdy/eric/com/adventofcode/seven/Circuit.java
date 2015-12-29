@@ -1,5 +1,9 @@
 package name.lemerdy.eric.com.adventofcode.seven;
 
+import name.lemerdy.eric.com.adventofcode.seven.signalProviders.SignalProvider;
+import name.lemerdy.eric.com.adventofcode.seven.signalProviders.SpecificValue;
+import name.lemerdy.eric.com.adventofcode.seven.signalProviders.Wire;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;

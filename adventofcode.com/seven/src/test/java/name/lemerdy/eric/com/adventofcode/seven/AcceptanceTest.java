@@ -1,5 +1,6 @@
 package name.lemerdy.eric.com.adventofcode.seven;
 
+import name.lemerdy.eric.com.adventofcode.seven.signalProviders.Wire;
 import org.junit.Ignore;
 import org.junit.Test;
 

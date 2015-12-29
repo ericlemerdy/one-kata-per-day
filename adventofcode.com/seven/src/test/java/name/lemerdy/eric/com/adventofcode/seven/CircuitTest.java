@@ -1,5 +1,8 @@
 package name.lemerdy.eric.com.adventofcode.seven;
 
+import name.lemerdy.eric.com.adventofcode.seven.signalProviders.SignalProvider;
+import name.lemerdy.eric.com.adventofcode.seven.signalProviders.SpecificValue;
+import name.lemerdy.eric.com.adventofcode.seven.signalProviders.Wire;
 import org.junit.Test;
 
 import java.util.Map;
