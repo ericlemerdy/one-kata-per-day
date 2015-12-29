@@ -6,13 +6,13 @@ import name.lemerdy.eric.com.adventofcode.seven.Circuit;
 import java.util.Optional;
 
 @Value
-public class LShiftGate implements SignalProvider {
+public class LShiftGate implements SignalCarrier {
     Wire wire;
     int value;
 
     @Override
     public Optional<SpecificValue> resolve(Circuit circuit) {
-        Optional<SpecificValue> wireValue = circuit.resolveSignal(wire);
+        Optional<SpecificValue> wireValue = circuit.signalOf(wire);
         return Optional.of(new SpecificValue(wireValue.get().getValue() << value));
     }
 }

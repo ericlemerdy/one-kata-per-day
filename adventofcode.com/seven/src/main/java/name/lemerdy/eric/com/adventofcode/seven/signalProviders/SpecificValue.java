@@ -6,7 +6,7 @@ import name.lemerdy.eric.com.adventofcode.seven.Circuit;
 import java.util.Optional;
 
 @Value
-public class SpecificValue implements SignalProvider {
+public class SpecificValue implements SignalCarrier {
     int value;
 
     @Override

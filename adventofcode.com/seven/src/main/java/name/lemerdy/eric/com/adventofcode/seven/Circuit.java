@@ -1,6 +1,6 @@
 package name.lemerdy.eric.com.adventofcode.seven;
 
-import name.lemerdy.eric.com.adventofcode.seven.signalProviders.SignalProvider;
+import name.lemerdy.eric.com.adventofcode.seven.signalProviders.SignalCarrier;
 import name.lemerdy.eric.com.adventofcode.seven.signalProviders.SpecificValue;
 import name.lemerdy.eric.com.adventofcode.seven.signalProviders.Wire;
 
@@ -21,13 +21,13 @@ public class Circuit {
                 .collect(toList());
     }
 
-    public Optional<SpecificValue> resolveSignal(SignalProvider signalProvider) {
-        if (signalProvider instanceof SpecificValue) {
-            return Optional.of((SpecificValue) signalProvider);
+    public Optional<SpecificValue> signalOf(SignalCarrier signalCarrier) {
+        if (signalCarrier instanceof SpecificValue) {
+            return Optional.of((SpecificValue) signalCarrier);
         }
-        Optional<SignalProvider> wire = circuit.stream()
-                .filter(i -> i.getWire().equals(signalProvider))
-                .map(Instruction::getSignalProvider)
+        Optional<SignalCarrier> wire = circuit.stream()
+                .filter(i -> i.getWire().equals(signalCarrier))
+                .map(Instruction::getSignalCarrier)
                 .findFirst();
         if (wire.isPresent()) {
             return wire.get().resolve(this);
@@ -35,8 +35,8 @@ public class Circuit {
         return Optional.empty();
     }
 
-    public Map<Wire, SignalProvider> signals() {
+    public Map<Wire, SignalCarrier> signals() {
         return circuit.stream()
-                .collect(toMap(Instruction::getWire, Instruction::getSignalProvider));
+                .collect(toMap(Instruction::getWire, Instruction::getSignalCarrier));
     }
 }

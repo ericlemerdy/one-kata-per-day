@@ -9,7 +9,7 @@ import static java.util.regex.Pattern.compile;
 
 @Value
 public class Instruction {
-    SignalProvider signalProvider;
+    SignalCarrier signalCarrier;
     Wire wire;
 
     public Instruction(String instruction) {
@@ -17,14 +17,14 @@ public class Instruction {
 
         signalProvidedToWire = compile("(\\d+) -> (\\w+)").matcher(instruction);
         if (signalProvidedToWire.matches()) {
-            signalProvider = new SpecificValue(Integer.valueOf(signalProvidedToWire.group(1)));
+            signalCarrier = new SpecificValue(Integer.valueOf(signalProvidedToWire.group(1)));
             wire = new Wire(signalProvidedToWire.group(2));
             return;
         }
 
         signalProvidedToWire = compile("(\\d+) AND (\\d+) -> (\\w+)").matcher(instruction);
         if (signalProvidedToWire.matches()) {
-            signalProvider = new AndGate(
+            signalCarrier = new AndGate(
                     new SpecificValue(Integer.valueOf(signalProvidedToWire.group(1))),
                     new SpecificValue(Integer.valueOf(signalProvidedToWire.group(2))));
             wire = new Wire(signalProvidedToWire.group(3));
@@ -33,7 +33,7 @@ public class Instruction {
 
         signalProvidedToWire = compile("(\\w+) AND (\\w+) -> (\\w+)").matcher(instruction);
         if (signalProvidedToWire.matches()) {
-            signalProvider = new AndGate(
+            signalCarrier = new AndGate(
                     new Wire(signalProvidedToWire.group(1)),
                     new Wire(signalProvidedToWire.group(2)));
             wire = new Wire(signalProvidedToWire.group(3));
@@ -42,7 +42,7 @@ public class Instruction {
 
         signalProvidedToWire = compile("(\\w+) OR (\\w+) -> (\\w+)").matcher(instruction);
         if (signalProvidedToWire.matches()) {
-            signalProvider = new OrGate(
+            signalCarrier = new OrGate(
                     new Wire(signalProvidedToWire.group(1)),
                     new Wire(signalProvidedToWire.group(2)));
             wire = new Wire(signalProvidedToWire.group(3));
@@ -51,7 +51,7 @@ public class Instruction {
 
         signalProvidedToWire = compile("(\\w+) LSHIFT (\\d+) -> (\\w+)").matcher(instruction);
         if (signalProvidedToWire.matches()) {
-            signalProvider = new LShiftGate(
+            signalCarrier = new LShiftGate(
                     new Wire(signalProvidedToWire.group(1)),
                     Integer.valueOf(signalProvidedToWire.group(2)));
             wire = new Wire(signalProvidedToWire.group(3));
