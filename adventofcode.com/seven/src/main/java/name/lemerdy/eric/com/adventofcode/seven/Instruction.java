@@ -15,21 +15,21 @@ public class Instruction {
     public Instruction(String instruction) {
         Matcher signalProvidedToWire;
 
-        signalProvidedToWire = compile("(\\d+) -> (\\w+)").matcher(instruction);
+        signalProvidedToWire = compile("(\\d+) -> (\\p{Lower}+)").matcher(instruction);
         if (signalProvidedToWire.matches()) {
             signalCarrier = new SpecificValue(Integer.valueOf(signalProvidedToWire.group(1)));
             wire = new Wire(signalProvidedToWire.group(2));
             return;
         }
 
-        signalProvidedToWire = compile("(\\w+) -> (\\w+)").matcher(instruction);
+        signalProvidedToWire = compile("(\\p{Lower}+) -> (\\p{Lower}+)").matcher(instruction);
         if (signalProvidedToWire.matches()) {
             signalCarrier = new Wire(signalProvidedToWire.group(1));
             wire = new Wire(signalProvidedToWire.group(2));
             return;
         }
 
-        signalProvidedToWire = compile("(\\d+) AND (\\d+) -> (\\w+)").matcher(instruction);
+        signalProvidedToWire = compile("(\\d+) AND (\\d+) -> (\\p{Lower}+)").matcher(instruction);
         if (signalProvidedToWire.matches()) {
             signalCarrier = new AndGate(
                     new SpecificValue(Integer.valueOf(signalProvidedToWire.group(1))),
@@ -38,7 +38,7 @@ public class Instruction {
             return;
         }
 
-        signalProvidedToWire = compile("(\\w+) AND (\\w+) -> (\\w+)").matcher(instruction);
+        signalProvidedToWire = compile("(\\p{Lower}+) AND (\\p{Lower}+) -> (\\p{Lower}+)").matcher(instruction);
         if (signalProvidedToWire.matches()) {
             signalCarrier = new AndGate(
                     new Wire(signalProvidedToWire.group(1)),
@@ -47,7 +47,7 @@ public class Instruction {
             return;
         }
 
-        signalProvidedToWire = compile("(\\w+) OR (\\w+) -> (\\w+)").matcher(instruction);
+        signalProvidedToWire = compile("(\\p{Lower}+) OR (\\p{Lower}+) -> (\\p{Lower}+)").matcher(instruction);
         if (signalProvidedToWire.matches()) {
             signalCarrier = new OrGate(
                     new Wire(signalProvidedToWire.group(1)),
@@ -56,7 +56,7 @@ public class Instruction {
             return;
         }
 
-        signalProvidedToWire = compile("(\\w+) LSHIFT (\\d+) -> (\\w+)").matcher(instruction);
+        signalProvidedToWire = compile("(\\p{Lower}+) LSHIFT (\\d+) -> (\\p{Lower}+)").matcher(instruction);
         if (signalProvidedToWire.matches()) {
             signalCarrier = new LShiftGate(
                     new Wire(signalProvidedToWire.group(1)),
@@ -65,7 +65,7 @@ public class Instruction {
             return;
         }
 
-        signalProvidedToWire = compile("(\\w+) RSHIFT (\\d+) -> (\\w+)").matcher(instruction);
+        signalProvidedToWire = compile("(\\p{Lower}+) RSHIFT (\\d+) -> (\\p{Lower}+)").matcher(instruction);
         if (signalProvidedToWire.matches()) {
             signalCarrier = new RShiftGate(
                     new Wire(signalProvidedToWire.group(1)),
@@ -74,7 +74,7 @@ public class Instruction {
             return;
         }
 
-        signalProvidedToWire = compile("NOT (\\w+) -> (\\w+)").matcher(instruction);
+        signalProvidedToWire = compile("NOT (\\p{Lower}+) -> (\\p{Lower}+)").matcher(instruction);
         if (signalProvidedToWire.matches()) {
             signalCarrier = new NotGate(new Wire(signalProvidedToWire.group(1)));
             wire = new Wire(signalProvidedToWire.group(2));
