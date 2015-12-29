@@ -38,6 +38,15 @@ public class Instruction {
             return;
         }
 
+        signalProvidedToWire = compile("(\\d+) AND (\\p{Lower}+) -> (\\p{Lower}+)").matcher(instruction);
+        if (signalProvidedToWire.matches()) {
+            signalCarrier = new AndGate(
+                    new SpecificValue(Integer.valueOf(signalProvidedToWire.group(1))),
+                    new Wire(signalProvidedToWire.group(2)));
+            wire = new Wire(signalProvidedToWire.group(3));
+            return;
+        }
+
         signalProvidedToWire = compile("(\\p{Lower}+) AND (\\p{Lower}+) -> (\\p{Lower}+)").matcher(instruction);
         if (signalProvidedToWire.matches()) {
             signalCarrier = new AndGate(
