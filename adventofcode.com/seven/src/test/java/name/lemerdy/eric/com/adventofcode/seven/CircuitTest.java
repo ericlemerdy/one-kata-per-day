@@ -94,4 +94,14 @@ public class CircuitTest {
 
         assertThat(d).contains(new SpecificValue(114));
     }
+
+    @Test
+    public void should_carry_signal_through_NOT_gate_with_wire() {
+        Circuit circuit = new Circuit("123 -> x\n" +
+                "NOT x -> h");
+
+        Optional<SpecificValue> d = circuit.signalOf(new Wire("h"));
+
+        assertThat(d).contains(new SpecificValue(65412));
+    }
 }

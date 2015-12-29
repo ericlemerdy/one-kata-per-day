@@ -67,6 +67,13 @@ public class Instruction {
             return;
         }
 
+        signalProvidedToWire = compile("NOT (\\w+) -> (\\w+)").matcher(instruction);
+        if (signalProvidedToWire.matches()) {
+            signalCarrier = new NotGate(new Wire(signalProvidedToWire.group(1)));
+            wire = new Wire(signalProvidedToWire.group(2));
+            return;
+        }
+
         throw new IllegalArgumentException("'" + instruction + "' is not parsable");
     }
 }
