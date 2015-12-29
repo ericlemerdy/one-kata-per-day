@@ -71,4 +71,14 @@ public class CircuitTest {
 
         assertThat(d).contains(new SpecificValue(507));
     }
+
+    @Test
+    public void should_compute_LSHIFT_instruction_with_wire_left_and_specific_value_right() {
+        Circuit circuit = new Circuit("123 -> x\n" +
+                "x LSHIFT 2 -> f");
+
+        Optional<SpecificValue> d = circuit.resolveSignal(new Wire("f"));
+
+        assertThat(d).contains(new SpecificValue(492));
+    }
 }
