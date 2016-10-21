@@ -36,3 +36,9 @@ The Code has the following behaviour:
 - Changes while adding new functionality are small and localised
 - Changes happen in the main (application assembly) and not in the domain
 	- This would happen if using Dependency Injection frameworks
+
+**How to start ?**
+
+You have to reset to a specific point in the history:
+
+    git checkout 76cd0abbaf95d50d7686e57b4c2061904fac8467
