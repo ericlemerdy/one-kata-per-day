@@ -1,1 +1,7 @@
+.idea/
+.npm/
 node_modules/
+.bash_history
+.babel.json
+.v8flags.*.json
+npm-debug.log
