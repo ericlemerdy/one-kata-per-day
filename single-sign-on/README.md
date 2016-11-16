@@ -28,3 +28,7 @@ The original design of this Kata was by Fredrik Wendt and he published it on
 [the codingdojo.org wiki](http://codingdojo.org/cgi-bin/index.pl?KataJEEWebAuthentication)
 
 Reference: [emilybache/Single-Sign-On-Kata: a kata useful for understanding Test Doubles](https://github.com/emilybache/Single-Sign-On-Kata.git)
+
+## Note
+
+You can find my kata execution in the `kata` package.
