@@ -14,6 +14,7 @@
 	<modules>
 		<module>adventofcode.com/seven</module>
 		<module>anagrams</module>
+		<module>data-munging</module>
 		<module>fibonacci</module>
 		<module>game-of-life/java</module>
 		<module>hundred-doors</module>
@@ -47,7 +48,7 @@
 			<dependency>
 				<groupId>org.assertj</groupId>
 				<artifactId>assertj-core</artifactId>
-				<version>3.2.0</version>
+				<version>3.6.1</version>
 				<scope>test</scope>
 			</dependency>
             <dependency>
