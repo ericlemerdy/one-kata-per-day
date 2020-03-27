@@ -1,0 +1,22 @@
+{
+  "name": "sources",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --require @babel/register",
+    "test-continuously": "mocha --require @babel/register --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "7.8.4",
+    "@babel/core": "7.9.0",
+    "@babel/node": "7.8.7",
+    "@babel/preset-env": "7.9.0",
+    "@babel/register": "7.9.0",
+    "chai": "4.2.0",
+    "mocha": "7.1.1"
+  }
+}
