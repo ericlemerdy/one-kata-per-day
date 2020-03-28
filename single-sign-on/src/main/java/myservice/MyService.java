@@ -13,7 +13,13 @@ public class MyService {
     }
     
     public Response handleRequest(Request request) {
-        // TODO: check request has a valid SSOToken
+        if (request.getSSOToken() == null) {
+            return new Response("sso token is not defined");
+        }
+        boolean isRegistryValid = this.registry.is_valid(request.getSSOToken());
+        if (!isRegistryValid) {
+            return new Response("sso token is invalid");
+        }
         return new Response("hello " + request.getName() + "!");
     }
 }
