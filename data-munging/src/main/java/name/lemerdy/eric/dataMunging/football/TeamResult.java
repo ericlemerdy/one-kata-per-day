@@ -2,6 +2,7 @@ package name.lemerdy.eric.dataMunging.football;
 
 import lombok.Value;
 
+import static java.lang.Integer.compare;
 import static java.lang.Math.abs;
 
 @Value
@@ -13,7 +14,6 @@ public class TeamResult implements Comparable {
     @Override
     public int compareTo(Object o) {
         TeamResult other = (TeamResult) o;
-        return new Integer(abs(numberOfGoalsFor - numberOfGoalsAgainst))
-                .compareTo(new Integer(abs(other.numberOfGoalsFor - other.numberOfGoalsAgainst)));
+        return compare(abs(numberOfGoalsFor - numberOfGoalsAgainst), abs(other.numberOfGoalsFor - other.numberOfGoalsAgainst));
     }
 }

@@ -2,6 +2,8 @@ package name.lemerdy.eric.dataMunging.weather;
 
 import lombok.Value;
 
+import static java.lang.Integer.compare;
+
 @Value
 public class TemperatureExtremum implements Comparable {
     int day;
@@ -11,8 +13,7 @@ public class TemperatureExtremum implements Comparable {
     @Override
     public int compareTo(Object o) {
         TemperatureExtremum other = (TemperatureExtremum) o;
-        return new Integer((max - min))
-                .compareTo(new Integer(other.max - other.min));
+        return compare(max - min, other.max - other.min);
     }
 }
 

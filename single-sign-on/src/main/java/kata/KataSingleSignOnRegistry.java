@@ -15,7 +15,7 @@ public class KataSingleSignOnRegistry implements SingleSignOnRegistry {
 
     public KataSingleSignOnRegistry(AuthenticationGateway authenticationGateway) {
         this.authenticationGateway = authenticationGateway;
-        this.validTokens = new ArrayList();
+        this.validTokens = new ArrayList<>();
     }
 
     @Override
