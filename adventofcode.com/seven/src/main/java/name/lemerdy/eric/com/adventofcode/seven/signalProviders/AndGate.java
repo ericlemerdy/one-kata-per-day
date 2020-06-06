@@ -14,6 +14,6 @@ public class AndGate implements SignalCarrier {
     public Optional<SpecificValue> resolve(Circuit circuit) {
         Optional<SpecificValue> leftValue = circuit.signalOf(left);
         Optional<SpecificValue> rightValue = circuit.signalOf(right);
-        return Optional.of(new SpecificValue(leftValue.get().getValue() & rightValue.get().getValue()));
+        return leftValue.flatMap(leftDefined -> rightValue.map(rightDefined -> new SpecificValue(leftDefined.getValue() & rightDefined.getValue())));
     }
 }

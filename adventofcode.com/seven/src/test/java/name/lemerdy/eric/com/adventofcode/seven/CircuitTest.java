@@ -84,6 +84,15 @@ public class CircuitTest {
     }
 
     @Test
+    public void should_not_carry_signal_through_AND_gate_when_wire_is_undefined() {
+        Circuit circuit = new Circuit("x AND y -> d");
+
+        Optional<SpecificValue> d = circuit.signalOf(new Wire("d"));
+
+        assertThat(d).isEmpty();
+    }
+
+    @Test
     public void should_carry_signal_through_OR_gate_with_wire_at_left_and_wire_at_right() {
         Circuit circuit = new Circuit("123 -> x\n" +
                 "456 -> y\n" +
@@ -92,6 +101,15 @@ public class CircuitTest {
         Optional<SpecificValue> d = circuit.signalOf(new Wire("d"));
 
         assertThat(d).contains(new SpecificValue(507));
+    }
+
+    @Test
+    public void should_not_carry_signal_through_OR_gate_with_undefined_wires() {
+        Circuit circuit = new Circuit("x OR y -> d");
+
+        Optional<SpecificValue> d = circuit.signalOf(new Wire("d"));
+
+        assertThat(d).isEmpty();
     }
 
     @Test
@@ -105,6 +123,15 @@ public class CircuitTest {
     }
 
     @Test
+    public void should_not_carry_signal_through_LSHIFT_gate_with_undefined_wire() {
+        Circuit circuit = new Circuit("x LSHIFT 2 -> f");
+
+        Optional<SpecificValue> d = circuit.signalOf(new Wire("f"));
+
+        assertThat(d).isEmpty();
+    }
+
+    @Test
     public void should_carry_signal_through_RSHIFT_gate_with_wire_by_value() {
         Circuit circuit = new Circuit("456 -> y\n" +
                 "y RSHIFT 2 -> g");
@@ -115,6 +142,15 @@ public class CircuitTest {
     }
 
     @Test
+    public void should_not_carry_signal_through_RSHIFT_gate_with_undefined_wire() {
+        Circuit circuit = new Circuit("y RSHIFT 2 -> g");
+
+        Optional<SpecificValue> d = circuit.signalOf(new Wire("g"));
+
+        assertThat(d).isEmpty();
+    }
+
+    @Test
     public void should_carry_signal_through_NOT_gate_with_wire() {
         Circuit circuit = new Circuit("123 -> x\n" +
                 "NOT x -> h");
@@ -122,5 +158,23 @@ public class CircuitTest {
         Optional<SpecificValue> d = circuit.signalOf(new Wire("h"));
 
         assertThat(d).contains(new SpecificValue(65412));
+    }
+
+    @Test
+    public void should_not_carry_signal_through_NOT_gate_with_undefined_wire() {
+        Circuit circuit = new Circuit("NOT x -> h");
+
+        Optional<SpecificValue> d = circuit.signalOf(new Wire("h"));
+
+        assertThat(d).isEmpty();
+    }
+
+    @Test
+    public void should_not_carry_signal_unknown_in_circuit() {
+        Circuit circuit = new Circuit("123 -> x");
+
+        Optional<SpecificValue> d = circuit.signalOf(new Wire("y"));
+
+        assertThat(d).isEmpty();
     }
 }

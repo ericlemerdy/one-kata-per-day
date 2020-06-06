@@ -11,7 +11,11 @@ public class NotGate implements SignalCarrier {
 
     @Override
     public Optional<SpecificValue> resolve(Circuit circuit) {
-        double notValue = Math.pow(2d, 16d) - circuit.signalOf(wire).get().getValue();
+        Optional<SpecificValue> specificValue = circuit.signalOf(wire);
+        if (!specificValue.isPresent()) {
+            return Optional.empty();
+        }
+        double notValue = Math.pow(2d, 16d) - specificValue.get().getValue();
         return Optional.of(new SpecificValue((int) notValue - 1));
     }
 }

@@ -14,9 +14,9 @@ import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.io.Resources.readLines;
 
 public class MinimumDifferenceInFile {
-    static <T> T minimum(URL file, ValuesFactory<T> factory) throws IOException {
+    static <T> Optional<T> minimum(URL file, ValuesFactory<T> factory) throws IOException {
         List<T> extrema = readLines(file, UTF_8, new LineProcessor<List<T>>() {
-            List<T> result = newArrayList();
+            final List<T> result = newArrayList();
 
             @Override
             public boolean processLine(String line) throws IOException {
@@ -26,14 +26,10 @@ public class MinimumDifferenceInFile {
                         return c == '-' || c == ' ';
                     }
                 }).splitToList(line);
-                if (datas.isEmpty()) {
-                    return true;
+                if (!datas.isEmpty()) {
+                    factory.create(datas).map(result::add);
                 }
-                Optional<T> data = factory.create(datas);
-                if (!data.isPresent()) {
-                    return true;
-                }
-                return result.add(data.get());
+                return true;
             }
 
             @Override
@@ -43,7 +39,6 @@ public class MinimumDifferenceInFile {
         });
         return extrema.stream()
                 .sorted()
-                .findFirst()
-                .get();
+                .findFirst();
     }
 }

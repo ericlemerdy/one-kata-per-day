@@ -9,8 +9,8 @@ import java.util.Optional;
 import static java.util.Optional.empty;
 
 public class InlinedWeather {
-    public static Integer minTemperatureSpreadDay(URL weatherFile) throws IOException {
-        TemperatureExtremum temperatureExtremum = MinimumDifferenceInFile.minimum(weatherFile, datas -> {
+    public static Optional<Integer> minTemperatureSpreadDay(URL weatherFile) throws IOException {
+        Optional<TemperatureExtremum> temperatureExtremum = MinimumDifferenceInFile.minimum(weatherFile, datas -> {
             try {
                 Integer day = Integer.valueOf(datas.get(0));
                 Integer max = Integer.valueOf(datas.get(1));
@@ -20,7 +20,7 @@ public class InlinedWeather {
                 return empty();
             }
         });
-        return temperatureExtremum.getDay();
+        return temperatureExtremum.map(TemperatureExtremum::getDay);
     }
 
 }
