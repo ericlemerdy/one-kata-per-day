@@ -1,11 +1,13 @@
-package com.codurance.solid.model.discount;
+package name.lemerdy.eric.solid.model.discount;
 
 import java.util.List;
 
 public class Discounter {
 
+	private Discounter() {}
+
 	public static double priceAfterDiscount(double numberOfBooks,
-			double totalPrice, List<DiscountRange> discountRanges) {
+											double totalPrice, List<DiscountRange> discountRanges) {
 		double booksDiscount = 1;
 
 		for (DiscountRange discountRange : discountRanges) {

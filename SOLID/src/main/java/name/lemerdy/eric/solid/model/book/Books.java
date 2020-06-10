@@ -1,4 +1,4 @@
-package com.codurance.solid.model.book;
+package name.lemerdy.eric.solid.model.book;
 
 import java.util.List;
 

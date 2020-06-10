@@ -1,12 +1,12 @@
-package com.codurance.solid.model;
+package name.lemerdy.eric.solid.model;
 
 import static java.lang.Math.round;
 
 import java.util.List;
 
-import com.codurance.solid.infrastructure.book.BookList;
-import com.codurance.solid.model.book.Book;
-import com.codurance.solid.model.book.Books;
+import name.lemerdy.eric.solid.infrastructure.book.BookList;
+import name.lemerdy.eric.solid.model.book.Book;
+import name.lemerdy.eric.solid.model.book.Books;
 
 public class Basket {
 

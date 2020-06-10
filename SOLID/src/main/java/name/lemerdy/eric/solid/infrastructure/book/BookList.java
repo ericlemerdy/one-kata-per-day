@@ -1,16 +1,16 @@
-package com.codurance.solid.infrastructure.book;
+package name.lemerdy.eric.solid.infrastructure.book;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import com.codurance.solid.model.book.Book;
-import com.codurance.solid.model.book.BookType;
-import com.codurance.solid.model.book.Books;
+import name.lemerdy.eric.solid.model.book.Book;
+import name.lemerdy.eric.solid.model.book.BookType;
+import name.lemerdy.eric.solid.model.book.Books;
 import com.google.common.collect.ImmutableList;
 
 public class BookList implements Books {
-	private List<Book> books = new ArrayList<Book>();
+	private List<Book> books = new ArrayList<>();
 	
 	@Override
 	public void add(Book item) {

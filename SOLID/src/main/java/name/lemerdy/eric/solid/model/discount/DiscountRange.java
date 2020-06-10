@@ -1,4 +1,4 @@
-package com.codurance.solid.model.discount;
+package name.lemerdy.eric.solid.model.discount;
 
 public class DiscountRange {
 

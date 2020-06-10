@@ -1,10 +1,10 @@
-package com.codurance.solid.model;
+package name.lemerdy.eric.solid.model;
 
-import com.codurance.solid.model.book.BookType;
-import com.codurance.solid.model.book.Books;
-import com.codurance.solid.model.discount.Discounter;
+import name.lemerdy.eric.solid.model.book.BookType;
+import name.lemerdy.eric.solid.model.book.Books;
+import name.lemerdy.eric.solid.model.discount.Discounter;
 
-import static com.codurance.solid.model.Basket.toDecimal;
+import static name.lemerdy.eric.solid.model.Basket.toDecimal;
 
 public class DiscountCalculator {
     public double priceWithDiscount(Books books) {

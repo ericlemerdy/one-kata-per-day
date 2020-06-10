@@ -27,7 +27,7 @@ public class MinimumDifferenceInFile {
                     }
                 }).splitToList(line);
                 if (!datas.isEmpty()) {
-                    factory.create(datas).map(result::add);
+                    factory.create(datas).ifPresent(result::add);
                 }
                 return true;
             }

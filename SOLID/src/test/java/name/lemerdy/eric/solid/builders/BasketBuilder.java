@@ -1,15 +1,15 @@
-package com.codurance.builders;
+package name.lemerdy.eric.solid.builders;
 
-import com.codurance.solid.Basket;
-import com.codurance.solid.Book;
+import name.lemerdy.eric.solid.model.Basket;
+import name.lemerdy.eric.solid.model.book.Book;
 
 public class BasketBuilder {
+
+	private Book[] books = new Book[] {};
 
 	public static BasketBuilder aBasket() {
 		return new BasketBuilder();
 	}
-
-	private Book[] books = new Book[] {};
 
 	public BasketBuilder with(Book... books) {
 		this.books = books;
@@ -26,6 +26,6 @@ public class BasketBuilder {
 		for (Book book : books) {
 			basket.add(book);
 		}
-	}
 
+	}
 }

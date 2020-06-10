@@ -1,10 +1,10 @@
-package com.codurance.solid.model.book;
+package name.lemerdy.eric.solid.model.book;
 
 import static java.lang.Double.MAX_VALUE;
 
 import java.util.List;
 
-import com.codurance.solid.model.discount.DiscountRange;
+import name.lemerdy.eric.solid.model.discount.DiscountRange;
 import com.google.common.collect.ImmutableList;
 
 public enum BookType {
