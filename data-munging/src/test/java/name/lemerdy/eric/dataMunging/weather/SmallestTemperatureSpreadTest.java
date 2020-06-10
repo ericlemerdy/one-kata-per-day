@@ -9,6 +9,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.io.Resources.getResource;
@@ -31,9 +32,21 @@ public class SmallestTemperatureSpreadTest {
                 new TemperatureExtremum(2, 79, 53));
         doReturn(extrema).when(weatherFileReader).readFile();
 
-        Integer minTemperaturesSpread = smallestTemperatureSpread.minTemperatureSpreadDay();
+        Optional<Integer> minTemperaturesSpread = smallestTemperatureSpread.minTemperatureSpreadDay();
 
-        assertThat(minTemperaturesSpread).isEqualTo(2);
+        assertThat(minTemperaturesSpread).hasValue(2);
+    }
+
+    @Test
+    public void with_empty_file() throws IOException {
+        URL weatherFile = getResource("empty.dat");
+        WeatherFileLineProcessor weatherFileLineProcessor = new WeatherFileLineProcessor();
+        WeatherFileReader weatherFileReader = new WeatherFileReader(weatherFile, weatherFileLineProcessor);
+        SmallestTemperatureSpread smallestTemperatureSpread = new SmallestTemperatureSpread(weatherFileReader);
+
+        Optional<Integer> minTemperatureSpreadDay = smallestTemperatureSpread.minTemperatureSpreadDay();
+
+        assertThat(minTemperatureSpreadDay).isEmpty();
     }
 
     @Test
@@ -43,8 +56,8 @@ public class SmallestTemperatureSpreadTest {
         WeatherFileReader weatherFileReader = new WeatherFileReader(weatherFile, weatherFileLineProcessor);
         SmallestTemperatureSpread smallestTemperatureSpread = new SmallestTemperatureSpread(weatherFileReader);
 
-        Integer minTemperatureSpreadDay = smallestTemperatureSpread.minTemperatureSpreadDay();
+        Optional<Integer> minTemperatureSpreadDay = smallestTemperatureSpread.minTemperatureSpreadDay();
 
-        assertThat(minTemperatureSpreadDay).isEqualTo(14);
+        assertThat(minTemperatureSpreadDay).hasValue(14);
     }
 }

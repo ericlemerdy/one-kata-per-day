@@ -4,18 +4,18 @@ import lombok.Value;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Value
 public class SmallestGoalDifference {
 
     FootballFileReader footballFileReader;
 
-    public String teamWithMinimumGoalDifference() throws IOException {
+    public Optional<String> teamWithMinimumGoalDifference() throws IOException {
         List<TeamResult> extrema = footballFileReader.readFile();
         return extrema.stream()
                 .sorted()
                 .findFirst()
-                .get()
-                .getTeam();
+                .map(TeamResult::getTeam);
     }
 }

@@ -4,19 +4,19 @@ import lombok.Value;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Value
 public class SmallestTemperatureSpread {
 
     WeatherFileReader weatherFileReader;
 
-    public Integer minTemperatureSpreadDay() throws IOException {
+    public Optional<Integer> minTemperatureSpreadDay() throws IOException {
         List<TemperatureExtremum> extrema = weatherFileReader.readFile();
         return extrema.stream()
                 .sorted()
                 .findFirst()
-                .get()
-                .getDay();
+                .map(TemperatureExtremum::getDay);
     }
 
 }

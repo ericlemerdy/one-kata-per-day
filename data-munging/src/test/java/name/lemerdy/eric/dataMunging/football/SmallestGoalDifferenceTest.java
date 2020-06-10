@@ -9,6 +9,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.io.Resources.getResource;
@@ -31,9 +32,21 @@ public class SmallestGoalDifferenceTest {
                 new TeamResult("Liverpool", 67, 30));
         doReturn(footballLeagueResults).when(footballFileReader).readFile();
 
-        String teamWithMinimumGoalDifference = smallestGoalDifference.teamWithMinimumGoalDifference();
+        Optional<String> teamWithMinimumGoalDifference = smallestGoalDifference.teamWithMinimumGoalDifference();
 
-        assertThat(teamWithMinimumGoalDifference).isEqualTo("Liverpool");
+        assertThat(teamWithMinimumGoalDifference).hasValue("Liverpool");
+    }
+
+    @Test
+    public void with_empty_file() throws IOException {
+        URL footballFile = getResource("empty.dat");
+        FootballFileLineProcessor footballFileLineProcessor = new FootballFileLineProcessor();
+        FootballFileReader footballFileReader = new FootballFileReader(footballFile, footballFileLineProcessor);
+        SmallestGoalDifference smallestGoalDifference = new SmallestGoalDifference(footballFileReader);
+
+        Optional<String> teamWithMinimumGoalDifference = smallestGoalDifference.teamWithMinimumGoalDifference();
+
+        assertThat(teamWithMinimumGoalDifference).isEmpty();
     }
 
     @Test
@@ -43,8 +56,8 @@ public class SmallestGoalDifferenceTest {
         FootballFileReader footballFileReader = new FootballFileReader(footballFile, footballFileLineProcessor);
         SmallestGoalDifference smallestGoalDifference = new SmallestGoalDifference(footballFileReader);
 
-        String teamWithMinimumGoalDifference = smallestGoalDifference.teamWithMinimumGoalDifference();
+        Optional<String> teamWithMinimumGoalDifference = smallestGoalDifference.teamWithMinimumGoalDifference();
 
-        assertThat(teamWithMinimumGoalDifference).isEqualTo("Aston_Villa");
+        assertThat(teamWithMinimumGoalDifference).hasValue("Aston_Villa");
     }
 }
