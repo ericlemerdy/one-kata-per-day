@@ -16,6 +16,7 @@
 		<module>adventofcode.com/2021</module>
 		<module>anagrams</module>
 		<module>data-munging</module>
+		<module>ddd-patterns</module>
 		<module>fibonacci</module>
 		<module>game-of-life/java</module>
 		<module>hundred-doors</module>
