@@ -1,12 +1,13 @@
 package myservice;
 
 import kata.KataSingleSignOnRegistry;
+import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import sso.Request;
 import sso.Response;
 import sso.SSOToken;
@@ -14,8 +15,10 @@ import sso.SSOToken;
 import static org.junit.Assert.assertEquals;
 
 
-@RunWith(MockitoJUnitRunner.class)
 public class MyServiceTest {
+
+    @Rule
+    public MockitoRule rule = MockitoJUnit.rule();
 
     @InjectMocks
     private MyService myService;

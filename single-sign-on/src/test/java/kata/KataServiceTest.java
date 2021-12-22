@@ -1,22 +1,23 @@
 package kata;
 
+import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.mockito.verification.VerificationMode;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import sso.Request;
 import sso.Response;
 import sso.SSOToken;
 import sso.SingleSignOnRegistry;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
 
-@RunWith(MockitoJUnitRunner.class)
 public class KataServiceTest {
+
+    @Rule
+    public MockitoRule rule = MockitoJUnit.rule();
 
     @InjectMocks
     private KataService kataService;

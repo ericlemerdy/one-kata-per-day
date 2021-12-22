@@ -1,26 +1,26 @@
 package name.lemerdy.eric.onlinestore;
 
-import static name.lemerdy.eric.onlinestore.model.ItemBuilder.oneItem;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
-
-import name.lemerdy.eric.onlinestore.EmailNotification;
-import name.lemerdy.eric.onlinestore.ShoppingBasket;
 import name.lemerdy.eric.onlinestore.model.Item;
 import name.lemerdy.eric.onlinestore.model.payment.PaymentFailure;
 import name.lemerdy.eric.onlinestore.model.payment.PaymentGateway;
 import name.lemerdy.eric.onlinestore.model.payment.PaymentStatus;
 import name.lemerdy.eric.onlinestore.model.payment.PaymentSuccess;
 import name.lemerdy.eric.onlinestore.model.stock.Stock;
-
+import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
-@RunWith(MockitoJUnitRunner.class)
+import static name.lemerdy.eric.onlinestore.model.ItemBuilder.oneItem;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
+
 public class ShoppingBasketShould {
+
+    @Rule
+    public MockitoRule rule = MockitoJUnit.rule();
 
     @Mock
     Stock stock;
