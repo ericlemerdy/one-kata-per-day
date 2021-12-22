@@ -13,6 +13,7 @@
 	</properties>
 	<modules>
 		<module>adventofcode.com/seven</module>
+		<module>adventofcode.com/2021</module>
 		<module>anagrams</module>
 		<module>data-munging</module>
 		<module>fibonacci</module>
