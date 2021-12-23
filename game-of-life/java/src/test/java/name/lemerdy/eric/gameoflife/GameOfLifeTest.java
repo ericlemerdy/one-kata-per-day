@@ -1,6 +1,6 @@
 package name.lemerdy.eric.gameoflife;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;

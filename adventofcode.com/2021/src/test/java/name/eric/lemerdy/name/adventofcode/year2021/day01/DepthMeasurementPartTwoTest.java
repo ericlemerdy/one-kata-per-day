@@ -1,7 +1,7 @@
 package name.eric.lemerdy.name.adventofcode.year2021.day01;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.file.Paths;

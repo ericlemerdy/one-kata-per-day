@@ -1,7 +1,7 @@
 package name.lemerdy.eric.pokerhand.comparator;
 
 import name.lemerdy.eric.pokerhand.model.Deck;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

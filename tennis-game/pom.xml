@@ -9,18 +9,23 @@
 	<artifactId>tennis-game</artifactId>
 	<dependencies>
 		<dependency>
-			<groupId>info.cukes</groupId>
+			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-junit</artifactId>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-junit-platform-engine</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<artifactId>junit</artifactId>
-			<groupId>junit</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<groupId>org.junit.jupiter</groupId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-suite-api</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

@@ -1,24 +1,20 @@
 package myservice;
 
 import kata.KataSingleSignOnRegistry;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
+import org.mockito.junit.jupiter.MockitoExtension;
 import sso.Request;
 import sso.Response;
 import sso.SSOToken;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
-
+@ExtendWith(MockitoExtension.class)
 public class MyServiceTest {
-
-    @Rule
-    public MockitoRule rule = MockitoJUnit.rule();
 
     @InjectMocks
     private MyService myService;
@@ -30,14 +26,14 @@ public class MyServiceTest {
     public void undefinedSSOTokenIsRejected() {
         Response response = myService.handleRequest(new Request("Foo", null));
 
-        assertEquals("sso token is not defined", response.getText());
+        assertThat(response.getText()).isEqualTo("sso token is not defined");
     }
 
     @Test
     public void invalidSSOTokenIsRejected() {
         Response response = myService.handleRequest(new Request("Foo", new SSOToken()));
 
-        assertEquals("sso token is invalid", response.getText());
+        assertThat(response.getText()).isEqualTo("sso token is invalid");
     }
 
     @Test
@@ -47,6 +43,6 @@ public class MyServiceTest {
 
         Response response = myService.handleRequest(new Request("Foo", ssoToken));
 
-        assertEquals("hello Foo!", response.getText());
+        assertThat(response.getText()).isEqualTo("hello Foo!");
     }
 }

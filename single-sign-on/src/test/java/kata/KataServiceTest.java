@@ -1,23 +1,21 @@
 package kata;
 
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
+import org.mockito.junit.jupiter.MockitoExtension;
 import sso.Request;
 import sso.Response;
 import sso.SSOToken;
 import sso.SingleSignOnRegistry;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.doReturn;
 
+@ExtendWith(MockitoExtension.class)
 public class KataServiceTest {
-
-    @Rule
-    public MockitoRule rule = MockitoJUnit.rule();
 
     @InjectMocks
     private KataService kataService;
@@ -35,11 +33,11 @@ public class KataServiceTest {
         assertThat(response.getText()).isEqualTo("Hello Éric");
     }
 
-    @Test(expected = IllegalAccessException.class)
-    public void with_invalid_credentials_should_deny_access() throws IllegalAccessException {
+    @Test
+    public void with_invalid_credentials_should_deny_access() {
         SSOToken invalidCredentials = new SSOToken();
         doReturn(false).when(singleSignOnRegistry).is_valid(invalidCredentials);
 
-        kataService.handleRequest(new Request("Éric", invalidCredentials));
+        assertThatThrownBy(() -> kataService.handleRequest(new Request("Éric", invalidCredentials))).isExactlyInstanceOf(IllegalAccessException.class);
     }
 }

@@ -2,7 +2,7 @@ package name.lemerdy.eric.com.adventofcode.seven;
 
 import name.lemerdy.eric.com.adventofcode.seven.signalProviders.SpecificValue;
 import name.lemerdy.eric.com.adventofcode.seven.signalProviders.Wire;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

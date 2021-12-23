@@ -25,7 +25,7 @@ public class TennisGameInitialization {
     }
 
     public Boolean looserMustChooseFieldSide() {
-        return null;
+        return winnerChoice == Choice.SERVE_OR_RECEIVE;
     }
 
     public void winnerChooseTheFieldSize() {

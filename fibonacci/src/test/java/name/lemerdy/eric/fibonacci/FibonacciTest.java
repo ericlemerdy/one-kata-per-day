@@ -1,12 +1,12 @@
 package name.lemerdy.eric.fibonacci;
 
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-
-@FixMethodOrder(NAME_ASCENDING)
+@TestMethodOrder(MethodOrderer.MethodName.class)
 public class FibonacciTest {
   @Test
   public void fibonacci_of_0_is_1() {

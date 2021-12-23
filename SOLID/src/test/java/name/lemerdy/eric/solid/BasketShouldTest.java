@@ -1,16 +1,13 @@
 package name.lemerdy.eric.solid;
 
-import static name.lemerdy.eric.solid.builders.BasketBuilder.aBasket;
-import static name.lemerdy.eric.solid.builders.BookBuilder.aCookingBook;
-import static name.lemerdy.eric.solid.builders.BookBuilder.aFantasyBook;
-import static name.lemerdy.eric.solid.builders.BookBuilder.aTravelBook;
-import static name.lemerdy.eric.solid.builders.BookBuilder.anITBook;
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-
 import name.lemerdy.eric.solid.model.Basket;
 import name.lemerdy.eric.solid.model.book.Book;
+import org.junit.jupiter.api.Test;
+
+import static name.lemerdy.eric.solid.builders.BasketBuilder.aBasket;
+import static name.lemerdy.eric.solid.builders.BookBuilder.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 public class BasketShouldTest {
 
@@ -24,9 +21,9 @@ public class BasketShouldTest {
 		assertEquals(0.0d, emptyBasket().priceWithDiscount(), 0d);
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
+	@Test
 	public void return_an_unmodifiable_list_of_books() {
-		aBasket().build().books().add(aCookingBook().build());
+		assertThrowsExactly(UnsupportedOperationException.class, () -> aBasket().build().books().add(aCookingBook().build()));
 	}
 
 	@Test

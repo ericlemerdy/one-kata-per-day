@@ -1,13 +1,13 @@
 package name.eric.lemerdy.name.adventofcode.year2021.day02;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.file.Paths;
 
-@Ignore("Because changes has been made in the spec.")
+@Disabled("Because changes has been made in the spec.")
 public class PlannedCoursePartOneTest {
 
     @Test
