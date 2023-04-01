@@ -1,4 +1,4 @@
-package name.lemerdy.eric.coffeMachineProject;
+package name.lemerdy.eric.coffeMachineProject.iteration1;
 
 public class DrinkMakerProtocolMessageBuilder {
     public static String take(Order order) {

@@ -1,4 +1,4 @@
-package name.lemerdy.eric.coffeMachineProject;
+package name.lemerdy.eric.coffeMachineProject.iteration1;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;

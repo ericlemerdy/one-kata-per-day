@@ -1,4 +1,4 @@
-package name.lemerdy.eric.coffeMachineProject;
+package name.lemerdy.eric.coffeMachineProject.iteration1;
 
 public record Drink(DrinkType drinkType, Sugars sugars) {
     public static Drink NONE = new Drink(DrinkType.NONE, Sugars.NONE);

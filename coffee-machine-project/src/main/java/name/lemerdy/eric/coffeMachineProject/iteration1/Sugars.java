@@ -1,4 +1,4 @@
-package name.lemerdy.eric.coffeMachineProject;
+package name.lemerdy.eric.coffeMachineProject.iteration1;
 
 public enum Sugars {
     ONE(1), TWO(2), NONE(0);

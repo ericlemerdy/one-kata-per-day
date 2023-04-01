@@ -1,4 +1,4 @@
-package name.lemerdy.eric.coffeMachineProject;
+package name.lemerdy.eric.coffeMachineProject.iteration1;
 
 public enum DrinkType {
     TEA("T"), HOT_CHOCOLATE("H"), COFFEE("C"), NONE("");
